@@ -13,13 +13,7 @@ curl -fsSL https://kiqr.dev/install.sh | sh
 
 This builds KIQR from source with Cargo (installing Rust if needed), puts `kiqr` on your PATH and starts the daemon at login. Set `KIQR_REF` to install a branch or tag.
 
-Then add your first site:
-
-```sh
-kiqr project add https://your-site.com --watch
-```
-
-Or open [http://127.0.0.1:7777](http://127.0.0.1:7777) and paste the URL there.
+Then open [http://127.0.0.1:7777](http://127.0.0.1:7777) and paste your website's address.
 
 ## Docker
 

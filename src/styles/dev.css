@@ -1,23 +1,6 @@
 /* kiqr.dev's own pieces, on top of the shared connect/cloud design (site.css). */
 
-/* ------------------------------------------------------------ install line */
 .lp-hero .wrap > *, .split > * { min-width: 0; }
-.term { display: flex; align-items: center; gap: 12px; max-width: 520px; margin: 0 0 22px; padding: 12px 12px 12px 16px; border-radius: var(--r); border: 1px solid var(--line-2); background: rgba(5, 7, 13, .7); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04); }
-.term code { flex: 1; min-width: 0; font: 13.5px/1.4 var(--mono); color: var(--fg); overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
-.term .pr { color: var(--accent); margin-right: 6px; user-select: none; }
-.term .copy { flex: none; font: 500 12px var(--mono); color: var(--muted); background: rgba(255, 255, 255, .05); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; transition: color .2s, border-color .2s; }
-.term .copy:hover { color: var(--fg); border-color: var(--line-2); }
-.lp-cta .term { margin: 0 auto 26px; text-align: left; }
-
-/* ----------------------------------------------------------- Seemo at work */
-.chat-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 20px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 12px; }
-.chat-top { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-.chat-top small { margin-left: auto; color: var(--dim); font: 12px var(--mono); }
-.chat-top .dot { width: 26px; height: 26px; border-radius: 8px; background: rgba(215, 255, 67, .12); display: grid; place-items: center; }
-.chat-top .dot span { width: 10px; height: 10px; border-radius: 3px; background: var(--signal); }
-.msg { max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
-.msg.you { align-self: flex-end; background: rgba(139, 156, 255, .16); border: 1px solid rgba(139, 156, 255, .25); border-bottom-right-radius: 6px; }
-.msg.seemo { align-self: flex-start; background: rgba(255, 255, 255, .04); border: 1px solid var(--line); border-bottom-left-radius: 6px; color: var(--muted); }
 
 /* ---------------------------------------------------------------- features */
 .feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
@@ -79,8 +62,7 @@
 }
 @media (max-width: 560px) {
   .feats { grid-template-columns: 1fr; }
-        .msg { max-width: 100%; }
-  .docs-pager { grid-template-columns: 1fr; }
+        .docs-pager { grid-template-columns: 1fr; }
   .docs-pager a.next { grid-column: 1; }
 }
 
@@ -95,21 +77,34 @@
   .nav .links-c a { padding: 7px 9px; font-size: 14px; }
 }
 
-/* ------------------------------------------------------------ the plan card */
-.plan-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 20px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 14px; }
-.obj { display: flex; flex-direction: column; gap: 7px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(5, 7, 13, .45); }
-.obj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14.5px; }
-.obj-top .up { font: 600 12px var(--mono); color: var(--accent); }
-.bar { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .06); overflow: hidden; }
-.bar span { display: block; height: 100%; border-radius: inherit; background: var(--grad); }
-.obj-meta { display: flex; justify-content: space-between; gap: 10px; font: 12px var(--mono); color: var(--dim); }
-.obj-meta b { color: var(--fg); font-weight: 600; }
-.msg.note { max-width: 100%; font-size: 13.5px; }
-.msg.note b { display: block; color: var(--fg); font-size: 12.5px; margin-bottom: 2px; }
-.proposal { border: 1px solid rgba(94, 234, 212, .3); border-radius: var(--r); padding: 14px; background: radial-gradient(400px 120px at 0% 0%, rgba(94, 234, 212, .08), transparent 70%), rgba(5, 7, 13, .5); display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
-.proposal .p-head { display: flex; justify-content: space-between; gap: 8px; font: 11.5px var(--mono); color: var(--dim); }
-.proposal .kind { color: var(--accent); text-transform: uppercase; letter-spacing: .1em; }
-.proposal ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
-.proposal .acts { display: flex; gap: 12px; align-items: center; font: 11.5px var(--mono); color: var(--dim); }
-.proposal .ok { color: var(--accent-ink); background: var(--accent); padding: 3px 10px; border-radius: 999px; font-weight: 600; }
-.split .intro + .intro { margin-top: -24px; }
+/* ------------------------------------------------------- screens from KIQR */
+.screen { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-2); background: #0b0f17; box-shadow: 0 40px 100px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .02), inset 0 1px 0 rgba(255, 255, 255, .05); }
+.screen-bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: rgba(16, 22, 38, .9); }
+.screen-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, .12); }
+.screen-bar span { margin: 0 auto; transform: translateX(-20px); font: 11.5px var(--mono); color: var(--dim); padding: 3px 12px; border-radius: 7px; background: rgba(5, 7, 13, .6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
+.screen img { display: block; width: 100%; height: auto; }
+
+.lp-hero.centred .wrap { display: block; text-align: center; }
+.lp-hero.centred .hero-text { max-width: 780px; margin: 0 auto; }
+.lp-hero.centred .lead { margin-left: auto; margin-right: auto; max-width: 640px; }
+.lp-hero.centred .row { justify-content: center; }
+.hero-shot { position: relative; margin-top: 56px; }
+.hero-shot::before { content: ""; position: absolute; inset: -40px 8% auto; height: 240px; z-index: -1; background: radial-gradient(closest-side, rgba(94, 234, 212, .22), rgba(139, 156, 255, .12) 55%, transparent); filter: blur(30px); }
+
+.tour { display: flex; flex-direction: column; gap: 96px; }
+.tour-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+.tour-row.flip > :first-child { order: 2; }
+.tour-text h3 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; letter-spacing: -.02em; font-weight: 650; margin: 14px 0 14px; }
+.tour-text p { color: var(--muted); font-size: 16px; margin: 0 0 12px; }
+
+@media (max-width: 900px) {
+  .tour { gap: 64px; }
+  .tour-row, .tour-row.flip { grid-template-columns: 1fr; gap: 24px; }
+  .tour-row.flip > :first-child { order: 0; }
+  .hero-shot { margin-top: 36px; }
+}
+@media (max-width: 560px) {
+  .screen { border-radius: 10px; }
+  .screen-bar { padding: 7px 10px; }
+  .screen-bar span { display: none; }
+}

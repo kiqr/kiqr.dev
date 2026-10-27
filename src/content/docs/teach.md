@@ -21,10 +21,6 @@ Some abilities connect with one click: you sign in to the app and approve, and t
 
 How you write a product update, how to publish to your blog, what the Monday report contains: write it once on the Abilities page under "Teach Seemo something", and Seemo follows it every time. It is saved as a `SKILL.md` you can edit.
 
-```sh
-kiqr abilities teach <slug>
-```
-
 ## Channels
 
 A channel is one account of an ability that publishes, plus a destination: an email address, a blog, a social account. A project can have as many as it wants of each kind, and two blogs are two channels with their own keys. Publishing always asks first, until you switch a channel to publish on its own.
