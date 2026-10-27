@@ -8,7 +8,7 @@ const docs = defineCollection({
     title: z.string(),
     description: z.string(),
     order: z.number(),
-    section: z.enum(["Start", "Using KIQR", "Building abilities", "kiqr.cloud"]),
+    section: z.enum(["Start", "Using KIQR", "Building abilities", "1-click apps"]),
   }),
 });
 
