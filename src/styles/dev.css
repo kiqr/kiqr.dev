@@ -2,6 +2,24 @@
 
 .lp-hero .wrap > *, .split > * { min-width: 0; }
 
+/* ----------------------------------------------------------- Seemo at work */
+.chat-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 20px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 12px; }
+.chat-top { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.chat-top small { margin-left: auto; color: var(--dim); font: 12px var(--mono); }
+.chat-top .dot { width: 26px; height: 26px; border-radius: 8px; background: rgba(215, 255, 67, .12); display: grid; place-items: center; }
+.chat-top .dot span { width: 10px; height: 10px; border-radius: 3px; background: var(--signal); }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
+.msg.you { align-self: flex-end; background: rgba(139, 156, 255, .16); border: 1px solid rgba(139, 156, 255, .25); border-bottom-right-radius: 6px; }
+.msg.seemo { align-self: flex-start; background: rgba(255, 255, 255, .04); border: 1px solid var(--line); border-bottom-left-radius: 6px; color: var(--muted); }
+.drafts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.draft { border: 1px solid var(--line); border-radius: var(--r); padding: 10px; background: rgba(5, 7, 13, .45); display: flex; flex-direction: column; gap: 8px; }
+.draft .img { aspect-ratio: 1.6; border-radius: 10px; display: flex; align-items: flex-end; padding: 10px; font: 650 14px/1.15 var(--sans); color: #1b1206; }
+.draft .img.one { background: linear-gradient(135deg, #ffb347, #ff7a18 60%, #7a2e00); }
+.draft .img.two { background: linear-gradient(135deg, #d7ff43, #5eead4 70%); color: #03211c; }
+.draft p { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+.draft .acts { display: flex; justify-content: space-between; align-items: center; font: 11.5px var(--mono); color: var(--dim); }
+.draft .ok { color: var(--accent-ink); background: var(--accent); padding: 3px 9px; border-radius: 999px; font-weight: 600; }
+
 /* ---------------------------------------------------------------- features */
 .feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
 .feat { background: var(--glass); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; transition: transform .35s var(--ease), border-color .3s; }
@@ -84,12 +102,6 @@
 .screen-bar span { margin: 0 auto; transform: translateX(-20px); font: 11.5px var(--mono); color: var(--dim); padding: 3px 12px; border-radius: 7px; background: rgba(5, 7, 13, .6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
 .screen img { display: block; width: 100%; height: auto; }
 
-.lp-hero.centred .wrap { display: block; text-align: center; }
-.lp-hero.centred .hero-text { max-width: 780px; margin: 0 auto; }
-.lp-hero.centred .lead { margin-left: auto; margin-right: auto; max-width: 640px; }
-.lp-hero.centred .row { justify-content: center; }
-.hero-shot { position: relative; margin-top: 56px; }
-.hero-shot::before { content: ""; position: absolute; inset: -40px 8% auto; height: 240px; z-index: -1; background: radial-gradient(closest-side, rgba(94, 234, 212, .22), rgba(139, 156, 255, .12) 55%, transparent); filter: blur(30px); }
 
 .tour { display: flex; flex-direction: column; gap: 96px; }
 .tour-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
@@ -101,10 +113,15 @@
   .tour { gap: 64px; }
   .tour-row, .tour-row.flip { grid-template-columns: 1fr; gap: 24px; }
   .tour-row.flip > :first-child { order: 0; }
-  .hero-shot { margin-top: 36px; }
-}
+  }
 @media (max-width: 560px) {
   .screen { border-radius: 10px; }
   .screen-bar { padding: 7px 10px; }
   .screen-bar span { display: none; }
+}
+@media (max-width: 560px) {
+  .drafts { grid-template-columns: 1fr; }
+  .drafts .draft:last-child { display: none; }
+  .draft .img { aspect-ratio: 2.6; }
+  .msg { max-width: 100%; }
 }

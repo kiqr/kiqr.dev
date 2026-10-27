@@ -1,11 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 import Screen from "../components/Screen.astro";
+import ChatCard from "../components/ChatCard.astro";
 import AppIcon from "../components/AppIcon.astro";
 import { GITHUB } from "../lib/site";
 
 // The tour: what a CMO does, each with the screen in KIQR where it happens.
 const tour = [
+  { eyebrow: "The plan", title: "A plan with numbers to reach.", src: "/screens/plan.webp", path: "/plan", alt: "KIQR's Plan page: Seemo's Q4 marketing plan with three objectives, each with a KPI and how far it is from its target, and a campaign",
+    text: ["Seemo proposes the marketing plan from what it learned: two to four objectives for the period, each with one KPI and a target, the channels in play and the campaigns under them.", "You approve it on a card or change it yourself. Everything Seemo makes after that is tied to an objective."] },
   { eyebrow: "Strategy", title: "Ask it what a CMO would know.", src: "/screens/chat.webp", path: "/chats", alt: "Seemo answering “What should we focus on this quarter?” with three options from the business profile and a recommendation",
     text: ["What to focus on this quarter. Why signups are flat. Which channel to drop. Seemo answers from your business profile, your plan and your numbers, gives its opinion and says where it comes from.", "It never invents facts about the business. If the website doesn't say it and you didn't say it, Seemo doesn't know it."] },
   { eyebrow: "Performance", title: "Every KPI against its target.", src: "/screens/performance.webp", path: "/performance", alt: "The Performance page: plan KPIs with progress against targets, and traffic and search metrics from Google Analytics and Search Console",
@@ -25,9 +28,9 @@ const owns: [string, string, string][] = [
 const apps: [string, string][] = [["googleanalytics", "Google Analytics"], ["googlesearchconsole", "Search Console"], ["plausibleanalytics", "Plausible"], ["wordpress", "WordPress"], ["email", "Email"], ["unblockingapi", "UnblockingAPI"], ["openai", "OpenAI images"], ["linkedin", "LinkedIn · soon"]];
 ---
 <Base full title="KIQR: Seemo, the CMO that lives on your machine" description="KIQR is an open-source AI CMO that runs on your own computer. Seemo reads your website, proposes a marketing plan with KPIs and targets, measures it with your analytics and runs the campaigns, with every step approved by you.">
-  <section class="lp-hero centred">
+  <section class="lp-hero">
     <div class="wrap">
-      <div class="reveal hero-text">
+      <div class="reveal">
         <span class="eyebrow">Open source · Runs locally</span>
         <h1>Meet Seemo, <em class="grad-text">your CMO.</em></h1>
         <p class="lead">Give KIQR your website. Seemo learns the business, proposes a marketing plan with KPIs and targets, reads your analytics every morning, and runs the campaigns that move the numbers. You approve every step.</p>
@@ -37,9 +40,7 @@ const apps: [string, string][] = [["googleanalytics", "Google Analytics"], ["goo
         </div>
         <p class="small">On your own Claude or Codex subscription or API key. No account needed.</p>
       </div>
-      <div class="reveal d2 hero-shot">
-        <Screen eager src="/screens/plan.webp" path="/plan" alt="KIQR's Plan page: Seemo's Q4 marketing plan with three objectives, each with a KPI and how far it is from its target, and a campaign" />
-      </div>
+      <div class="reveal d2"><ChatCard /></div>
     </div>
   </section>
 
