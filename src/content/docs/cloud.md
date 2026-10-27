@@ -1,5 +1,6 @@
 ---
-title: "1-click apps"
+title: "Connect apps in one click with kiqr.cloud"
+nav: "1-click apps"
 description: "How kiqr.cloud links your KIQR agent and connects apps with one click, and what it keeps."
 order: 8
 section: kiqr.cloud

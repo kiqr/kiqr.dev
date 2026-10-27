@@ -23,7 +23,7 @@ const toc = headings.filter((h) => h.depth === 2);
         <div>
           <span class="docs-sec">{s}</span>
           {all.filter((d) => d.data.section === s).map((d) => (
-            <a href={href(d.id)} class={d.id === doc.id ? "on" : undefined} aria-current={d.id === doc.id ? "page" : undefined}>{d.data.title}</a>
+            <a href={href(d.id)} class={d.id === doc.id ? "on" : undefined} aria-current={d.id === doc.id ? "page" : undefined}>{d.data.nav ?? d.data.title}</a>
           ))}
         </div>
       ))}
@@ -34,8 +34,8 @@ const toc = headings.filter((h) => h.depth === 2);
       <p class="lead">{doc.data.description}</p>
       <Content />
       <div class="docs-pager">
-        {prev ? <a href={href(prev.id)} class="glow"><small>Previous</small>{prev.data.title}</a> : <span />}
-        {next && <a href={href(next.id)} class="glow next"><small>Next</small>{next.data.title}</a>}
+        {prev ? <a href={href(prev.id)} class="glow"><small>Previous</small>{prev.data.nav ?? prev.data.title}</a> : <span />}
+        {next && <a href={href(next.id)} class="glow next"><small>Next</small>{next.data.nav ?? next.data.title}</a>}
       </div>
     </article>
     {toc.length > 2 && (
