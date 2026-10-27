@@ -1,8 +1,8 @@
 ---
-title: "What is KIQR cloud?"
+title: "1-click apps"
 description: "How kiqr.cloud links your KIQR agent and connects apps with one click, and what it keeps."
 order: 8
-section: "1-click apps"
+section: kiqr.cloud
 ---
 
 KIQR runs on your computer, at an address only your computer can reach. Many apps will only send a sign-in back to a secure web address, and some need an app secret that cannot ship inside an open-source program. [kiqr.cloud](/cloud) is the small gateway in between. KIQR works without it; with it, connecting an app is a click.
