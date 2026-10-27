@@ -1,0 +1,11 @@
+---
+import { mark, abilityMark } from "../lib/icons";
+interface Props { name?: string; ability?: string; size?: number }
+const { name, ability, size = 18 } = Astro.props;
+const m = ability ? abilityMark(ability) : mark(name ?? "");
+---
+{m.paths.length ? (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill={m.color} aria-hidden="true" focusable="false">
+    {m.paths.map((p) => <path d={p.d} fill-rule={p.rule} />)}
+  </svg>
+) : <span>{m.letter}</span>}

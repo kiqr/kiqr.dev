@@ -1,0 +1,11 @@
+---
+// KIQR's mark: two points, connected.
+interface Props { size?: number }
+const { size = 26 } = Astro.props;
+---
+<svg class="mark" viewBox="0 0 26 26" width={size} height={size} aria-hidden="true">
+  <defs><linearGradient id="brand-grad" x1="0" x2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#8b9cff"/></linearGradient></defs>
+  <path class="ln" d="M7 18 C 11 18, 15 8, 19 8" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <rect x="3" y="14.5" width="7" height="7" rx="2" fill="#d7ff43"/>
+  <circle cx="19.5" cy="8" r="4" fill="#8b9cff"/>
+</svg>

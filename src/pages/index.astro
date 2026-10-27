@@ -1,0 +1,117 @@
+---
+import Base from "../layouts/Base.astro";
+import ChatCard from "../components/ChatCard.astro";
+import Install from "../components/Install.astro";
+import Steps from "../components/Steps.astro";
+import AppIcon from "../components/AppIcon.astro";
+import { GITHUB } from "../lib/site";
+
+const features: [string, string, string][] = [
+  ["It knows your business, with receipts", "The profile is extracted from your site, fact by fact, each one linked to its source page and kept current when the site changes. Everything Seemo makes starts from it.", "M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"],
+  ["Drafts you approve", "Every post lands in the chat as it will look, image included. Approve it for a channel, publish now or pick a time, and the daemon sends it on schedule.", "M20 6 9 17l-5-5"],
+  ["Tasks on a schedule", "“Every weekday at 10:00, write one LinkedIn post.” Say yes once; every run is kept with its steps and cost.", "M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"],
+  ["Images from day one", "No image API needed: on-brand cards rendered locally from your site's own colours, fonts and logo. Add fal.ai or OpenAI for photos.", "M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4"],
+  ["Teach it in plain words", "How you write a product update, how to publish to your blog: write it once as an ability and Seemo follows it every time.", "M4 19h16M6 15l9-9 3 3-9 9H6z"],
+  ["Files, not a database", "~/.kiqr is YAML and Markdown in a local git repository. Every change is a commit. Grep it, diff it, back it up.", "M4 4h10l6 6v10H4zM14 4v6h6"],
+  ["Your model, your machine", "Runs on your own Claude or Codex subscription or API key. No account, and nothing leaves your machine that you did not send.", "M4 6h16v10H4zM8 20h8M12 16v4"],
+  ["One binary, open source", "A Rust daemon with the UI embedded, a CLI and an MCP server. AGPL; nothing in the core is gated.", "M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"],
+];
+const apps: [string, string][] = [["wordpress", "WordPress"], ["email", "Email"], ["googleanalytics", "Google Analytics"], ["googlesearchconsole", "Search Console"], ["plausibleanalytics", "Plausible"], ["unblockingapi", "UnblockingAPI"], ["openai", "OpenAI images"], ["linkedin", "LinkedIn · soon"]];
+---
+<Base full title="KIQR: a marketing team that lives on your machine" description="KIQR is an open-source marketing agent that runs on your own computer. It reads your website, builds a business profile with sources, and writes, designs and schedules posts, articles and emails with you.">
+  <section class="lp-hero">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Open source · Runs locally</span>
+        <h1>A marketing team that <em class="grad-text">lives on your machine.</em></h1>
+        <p class="lead">Give KIQR your website. It reads it, builds a business profile where every fact links back to its page, and from then on Seemo, the marketer built in, writes, designs and schedules with you.</p>
+        <Install />
+        <div class="row">
+          <a href="/docs/install" class="btn primary lg">Get started</a>
+          <a href={`${GITHUB}/kiqr`} class="btn lg">View on GitHub</a>
+        </div>
+        <p class="small">On your own Claude or Codex subscription or API key. No account needed.</p>
+      </div>
+      <div class="reveal d2"><ChatCard /></div>
+    </div>
+  </section>
+
+  <section class="lp-section" id="how">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From your site to a week of posts.</h2>
+        <p class="intro">Three steps, then Seemo keeps going on the schedule you set.</p>
+      </div>
+      <Steps steps={[
+        ["Install and add your site", "One command, then <code>kiqr project add https://your-site.com</code>. KIQR reads up to 200 pages.", "M4 17l6-6-6-6M12 19h8"],
+        ["Check the profile", "What you sell, to whom, in which voice. Each fact links to the page it came from.", "M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"],
+        ["Approve and publish", "Seemo drafts with images. Approve for a channel, publish now or pick a time.", "M22 2 11 13M22 2l-7 20-4-9-9-4z"],
+      ]} />
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Why KIQR</span>
+        <h2>Built the way developers like it.</h2>
+      </div>
+      <div class="feats">
+        {features.map(([title, text, icon], i) => (
+          <div class={`feat glow reveal d${i % 4}`}>
+            <span class="ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icon}/></svg></span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Marketplace</span>
+        <h2>Abilities, from the marketplace or your own words.</h2>
+        <p class="intro">Publish to WordPress, send email, read your analytics, create photos. An ability is a folder of Markdown and YAML; anyone can write one.</p>
+        <div class="row">
+          <a href="/marketplace" class="btn primary">Browse the marketplace</a>
+          <a href="/docs/abilities" class="btn">Ability format</a>
+        </div>
+      </div>
+      <div class="apps reveal d1">
+        {apps.map(([icon, name]) => (
+          <div class="app glow"><span class="mono-tile"><AppIcon name={icon} /></span><span class="nm">{name}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta slim">
+    <div class="wrap">
+      <div class="panel glow reveal">
+        <span class="eyebrow">kiqr.cloud</span>
+        <h2>Connect apps with one click.</h2>
+        <p>kiqr.cloud is the optional gateway between your local agent and the internet's apps. Sign in once, then connect WordPress, Google Analytics and more without copying a key.</p>
+        <div class="row">
+          <a href="/cloud" class="btn primary lg">How kiqr.cloud works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="wrap">
+      <div class="panel glow reveal">
+        <span class="eyebrow">Install</span>
+        <h2>Your marketer, on your machine.</h2>
+        <Install />
+        <div class="row">
+          <a href="/docs" class="btn lg">Read the docs</a>
+          <a href={`${GITHUB}/kiqr`} class="btn lg">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

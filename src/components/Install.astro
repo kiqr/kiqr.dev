@@ -1,0 +1,14 @@
+---
+import { INSTALL } from "../lib/site";
+---
+<div class="term">
+  <code><span class="pr">$</span> {INSTALL}</code>
+  <button type="button" class="copy" data-copy={INSTALL} aria-label="Copy the install command">Copy</button>
+</div>
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((b) =>
+    b.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy!); b.textContent = "Copied"; } catch { b.textContent = "Select it"; }
+      setTimeout(() => (b.textContent = "Copy"), 1600);
+    }));
+</script>

@@ -1,0 +1,20 @@
+---
+import Mark from "./Mark.astro";
+import { CLOUD, GITHUB } from "../lib/site";
+const path = Astro.url.pathname.replace(/\.html$/, "");
+const links = [["/marketplace", "Marketplace"], ["/docs", "Docs"], ["/cloud", "Cloud"]];
+const on = (href: string) => path === href || path.startsWith(href + "/");
+---
+<header class="top">
+  <nav class="nav" aria-label="Main">
+    <a href="/" class="brand" aria-label="KIQR home"><Mark /><span>kiqr<small>.dev</small></span></a>
+    <div class="links-c">
+      {links.map(([href, label]) => <a href={href} class={on(href) ? "on" : undefined}>{label}</a>)}
+      <a href={GITHUB} class="gh">GitHub</a>
+    </div>
+    <div class="end">
+      <a href={`${CLOUD}/users/sign_in`}>Sign in</a>
+      <a href="/docs/install" class="btn primary">Install</a>
+    </div>
+  </nav>
+</header>

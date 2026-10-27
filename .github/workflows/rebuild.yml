@@ -1,0 +1,18 @@
+# The marketplace page is read from the marketplace index at build time, so
+# Cloudflare Pages rebuilds the site every six hours to pick up new abilities.
+# CF_PAGES_DEPLOY_HOOK is the project's deploy hook URL (Settings → Builds →
+# Deploy hooks). Without it this does nothing.
+name: Rebuild
+on:
+  schedule: [{ cron: "17 */6 * * *" }]
+  workflow_dispatch:
+permissions: {}
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a Cloudflare Pages build
+        env: { HOOK: "${{ secrets.CF_PAGES_DEPLOY_HOOK }}" }
+        run: |
+          if [ -z "$HOOK" ]; then echo "CF_PAGES_DEPLOY_HOOK is not set; skipping."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Build triggered."

@@ -1,0 +1,40 @@
+---
+// Connect, through the cloud: the agent on your computer, kiqr.cloud in the
+// middle, the apps on the right, with pulses travelling along the wires.
+import AppIcon from "./AppIcon.astro";
+const apps: [string, string, number, boolean][] = [
+  ["wordpress", "WordPress", 48, true], ["unblockingapi", "UnblockingAPI", 128, true],
+  ["googleanalytics", "Analytics", 208, true], ["googlesearchconsole", "Search Console", 288, true],
+  ["linkedin", "LinkedIn", 368, false],
+];
+---
+<svg class="cmap" viewBox="0 0 600 420" role="img" aria-label="Your KIQR agent connects through kiqr.cloud to WordPress, UnblockingAPI, Analytics and Search Console">
+  <defs>
+    <linearGradient id="wire-grad" x1="0" x2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#8b9cff"/></linearGradient>
+    <radialGradient id="cloud-grad"><stop offset="0" stop-color="#c4b5fd"/><stop offset=".55" stop-color="#8b9cff"/><stop offset="1" stop-color="#5eead4" stop-opacity=".9"/></radialGradient>
+    <filter id="pulse-glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <path id="w-agent" class="wire" d="M 96 208 C 150 208, 190 208, 236 208"/>
+  {apps.map(([, , y, on], i) => <path id={`w-${i}`} class={on ? "wire" : "wire soon"} d={`M 324 208 C 380 208, 400 ${y}, 452 ${y}`}/>)}
+  <circle class="pulse" r="3"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#w-agent"/></animateMotion></circle>
+  {apps.map(([, , , on], i) => on && (
+    <circle class={i % 2 ? "pulse b" : "pulse"} r="2.6"><animateMotion dur={`${2.6 + i * 0.35}s`} begin={`-${i * 0.55}s`} repeatCount="indefinite"><mpath href={`#w-${i}`}/></animateMotion></circle>
+  ))}
+  <rect class="node on" x="28" y="172" width="68" height="72" rx="18"/>
+  <rect class="agent-dot" x="51" y="195" width="22" height="22" rx="6"/>
+  <text class="b" x="62" y="270" text-anchor="middle">Your KIQR agent</text>
+  <text x="62" y="287" text-anchor="middle">on your computer</text>
+  <circle class="cloud-ring" cx="280" cy="208" r="44"/>
+  <circle class="cloud-ring two" cx="280" cy="208" r="44"/>
+  <circle class="cloud-core" cx="280" cy="208" r="40" opacity=".22"/>
+  <circle class="node on" cx="280" cy="208" r="34"/>
+  <path d="M 266 216 h 26 a 8 8 0 0 0 0 -16 a 11 11 0 0 0 -21 -2 a 8 8 0 0 0 -5 18 z" fill="url(#cloud-grad)"/>
+  <text class="b" x="280" y="270" text-anchor="middle">kiqr.cloud</text>
+  {apps.map(([icon, name, y, on]) => (
+    <g transform={`translate(452 ${y - 18})`}>
+      <rect class={on ? "node on" : "node"} width="36" height="36" rx="11"/>
+      <g transform="translate(9 9)"><AppIcon name={icon} /></g>
+      <text x="48" y="23" opacity={on ? undefined : ".55"}>{name}{on ? "" : " · soon"}</text>
+    </g>
+  ))}
+</svg>

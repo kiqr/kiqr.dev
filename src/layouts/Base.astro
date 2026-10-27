@@ -1,0 +1,59 @@
+---
+import "../styles/site.css";
+import "../styles/dev.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+interface Props { title: string; description: string; full?: boolean }
+const { title, description, full = false } = Astro.props;
+const pageTitle = full ? title : `${title} · KIQR`;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "/") || "/", Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KIQR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#070a12" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body class="landing">
+    <div class="sky" aria-hidden="true"><i></i><i></i><i></i></div>
+    <Nav />
+    <main><slot /></main>
+    <Footer />
+    <script>
+      // Sections rise into view, glass lights up under the pointer, the nav
+      // tightens on scroll. Nothing moves for people who asked for less motion.
+      const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const onScroll = () => document.body.classList.toggle("scrolled", window.scrollY > 24);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      const items = document.querySelectorAll(".reveal");
+      if (calm || !("IntersectionObserver" in window)) {
+        items.forEach((el) => el.classList.add("in"));
+      } else {
+        const seen = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); seen.unobserve(e.target); }
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+        items.forEach((el) => seen.observe(el));
+      }
+      if (!calm) document.body.addEventListener("pointermove", (e) => {
+        const el = (e.target as Element).closest?.(".glow") as HTMLElement | null;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+      }, { passive: true });
+    </script>
+  </body>
+</html>

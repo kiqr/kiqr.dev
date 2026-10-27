@@ -1,0 +1,88 @@
+---
+import Base from "../layouts/Base.astro";
+import AppIcon from "../components/AppIcon.astro";
+import { apps as load } from "../lib/marketplace";
+const apps = await load();
+apps.sort((a, b) => Number(b.oneClick) - Number(a.oneClick));
+const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
+---
+<Base title="Marketplace" description="Abilities for KIQR: publish to WordPress, send email, read Google Analytics and Search Console, create images, read blocked pages. Install them in KIQR under Setup → Abilities.">
+  <section class="lp-hero apps-hero reveal">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Marketplace</span>
+        <h1>Abilities for your agent</h1>
+        <p class="lead">Each one teaches Seemo something new or connects it to an app. Install them in KIQR under Setup → Abilities. Apps marked 1-click connect with a sign-in through <a href="/cloud">kiqr.cloud</a>, no keys to copy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section tight" id="apps">
+    <div class="wrap">
+      <div class="app-tools">
+        <input type="search" class="app-search" placeholder="Search abilities" aria-label="Search abilities" data-q>
+        <div class="app-cats" role="group" aria-label="Category">
+          <button class="chip-btn on" data-cat="">All</button>
+          <button class="chip-btn" data-cat="1-click">1-click</button>
+          {categories.map((c) => <button class="chip-btn" data-cat={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</button>)}
+        </div>
+      </div>
+
+      <div class="app-cards">
+        {apps.map((app) => (
+          <article class="app-card glow reveal" data-name={[app.name, app.summary, app.author].join(" ").toLowerCase()} data-cats={[...app.categories, app.oneClick ? "1-click" : ""].join(" ").trim()}>
+            <header>
+              <span class="mono-tile lg">{app.avatar && !app.builtIn ? <img src={app.avatar} alt="" width="28" height="28" loading="lazy" /> : <AppIcon ability={app.id} size={24} />}</span>
+              <span class="min0">
+                <h2>{app.name}</h2>
+                <p class="by">by {app.author}{app.version && ` · v${app.version}`}{app.builtIn && " · built into KIQR"}</p>
+              </span>
+            </header>
+            <p class="sum">{app.summary}</p>
+            <footer>
+              {app.oneClick && <span class="oneclick-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>1-click</span>}
+              {app.categories.map((c) => <span class="tag">{c}</span>)}
+              {app.cost && <span class="cost">{app.cost}</span>}
+            </footer>
+          </article>
+        ))}
+      </div>
+      <p class="muted sm none" data-empty hidden>No ability matches that.</p>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="wrap">
+      <div class="panel glow reveal">
+        <span class="eyebrow">Build</span>
+        <h2>Missing one? Write it.</h2>
+        <p>An ability is a folder of Markdown and YAML. Test it in your own KIQR, then open a pull request.</p>
+        <div class="row">
+          <a href="/docs/publish" class="btn primary lg">Publish an ability</a>
+          <a href="/docs/abilities" class="btn lg">Ability format</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Filter the cards by the search box and the category chips.
+  const q = document.querySelector<HTMLInputElement>("[data-q]")!;
+  const chips = [...document.querySelectorAll<HTMLButtonElement>("[data-cat]")];
+  const cards = [...document.querySelectorAll<HTMLElement>(".app-card")];
+  const empty = document.querySelector<HTMLElement>("[data-empty]")!;
+  const apply = () => {
+    const text = q.value.trim().toLowerCase();
+    const cat = chips.find((c) => c.classList.contains("on"))?.dataset.cat ?? "";
+    let shown = 0;
+    for (const el of cards) {
+      const ok = (!text || el.dataset.name!.includes(text)) && (!cat || el.dataset.cats!.split(" ").includes(cat));
+      el.hidden = !ok;
+      if (ok) { shown++; el.classList.add("in"); }
+    }
+    empty.hidden = shown > 0;
+  };
+  q.addEventListener("input", apply);
+  chips.forEach((c) => c.addEventListener("click", () => { chips.forEach((o) => o.classList.toggle("on", o === c)); apply(); }));
+</script>

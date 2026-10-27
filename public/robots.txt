@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kiqr.dev/sitemap-index.xml

@@ -1,0 +1,77 @@
+---
+import Base from "../layouts/Base.astro";
+import ConnectMap from "../components/ConnectMap.astro";
+import Steps from "../components/Steps.astro";
+import AppIcon from "../components/AppIcon.astro";
+import { CLOUD } from "../lib/site";
+const apps: [string, string, "on" | "soon"][] = [
+  ["wordpress", "WordPress", "on"], ["unblockingapi", "UnblockingAPI", "on"], ["email", "Email (SMTP)", "on"],
+  ["plausibleanalytics", "Plausible", "on"], ["googleanalytics", "Google Analytics", "on"], ["googlesearchconsole", "Search Console", "on"],
+  ["linkedin", "LinkedIn", "soon"], ["facebook", "Facebook", "soon"],
+];
+---
+<Base full title="kiqr.cloud: connect your KIQR agent with the apps you use" description="kiqr.cloud is the gateway between your local KIQR marketing agent and services and APIs on the internet, such as WordPress and UnblockingAPI. Sign in once and connect apps with one click, no API keys to copy.">
+  <section class="lp-hero">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Connect · Cloud</span>
+        <h1>Connect your KIQR agent with <em class="grad-text">the apps you use.</em></h1>
+        <p class="lead">KIQR is a marketing agent that runs on your own computer. kiqr.cloud is its gateway to services and APIs on the internet: sign in once, approve, and your agent can publish, read and measure there. No API keys or passwords to copy.</p>
+        <div class="row">
+          <a href={`${CLOUD}/users/sign_up`} class="btn primary lg">Get started, free</a>
+          <a href="/marketplace" class="btn lg">See the apps</a>
+        </div>
+        <p class="small">Your KIQR agent works without it too.</p>
+      </div>
+      <div class="reveal d2"><ConnectMap /></div>
+    </div>
+  </section>
+
+  <section class="lp-section" id="how">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>Three steps, once.</h2>
+        <p class="intro">After that, connecting another app is a single click inside KIQR.</p>
+      </div>
+      <Steps steps={[
+        ["Create your account", "With your email, or continue with GitHub, Google or Facebook.", "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0"],
+        ["Link your KIQR agent", "In KIQR, choose “Sign in to kiqr.cloud” next to Settings. Approve the agent; on a server, enter the code it shows.", "M9 15l6-6M8 11l-2 2a3 3 0 0 0 4 4l2-2m4-2 2-2a3 3 0 0 0-4-4l-2 2"],
+        ["Connect your apps", "Pick an app in KIQR, sign in to it and approve. Your agent can work there right away.", "M5 12h4l3-7 3 14 3-7h1"],
+      ]} />
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Apps</span>
+        <h2>Where your agent can work</h2>
+        <p class="intro">More apps arrive through the KIQR marketplace. Each one is connected per project, so two blogs are two connections. <a href="/marketplace">See the marketplace</a>.</p>
+      </div>
+      <div class="apps">
+        {apps.map(([icon, name, state], i) => (
+          <div class={`app glow reveal d${i % 4}`}>
+            <span class="mono-tile"><AppIcon name={icon} /></span>
+            <span class="nm">{name}</span>
+            <span class={`state ${state}`}>{state === "on" ? "Available" : "Soon"}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="wrap">
+      <div class="panel glow reveal">
+        <span class="eyebrow">Connect</span>
+        <h2>Give your agent its accounts.</h2>
+        <p>Create a kiqr.cloud account and link your KIQR agent in a minute.</p>
+        <div class="row">
+          <a href={`${CLOUD}/users/sign_up`} class="btn primary lg">Get started, free</a>
+          <a href={`${CLOUD}/users/sign_in`} class="btn lg">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,13 @@
+---
+interface Props { steps: [string, string, string][] }
+const { steps } = Astro.props;
+---
+<div class="steps">
+  {steps.map(([title, text, icon], i) => (
+    <div class={`step glow reveal d${i}`}>
+      <span class="ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icon}/></svg></span>
+      <h3>{title}</h3>
+      <p set:html={text} />
+    </div>
+  ))}
+</div>
