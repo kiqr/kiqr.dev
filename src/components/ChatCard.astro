@@ -1,20 +1,103 @@
 ---
-// A moment with Seemo: you ask, it drafts from the profile, you approve.
+// Seemo at work, in five short conversations: one per core function. They
+// take turns; the dots pick one, hovering holds it, and nothing turns on its
+// own for people who asked for less motion.
+const scenes = [
+  { label: "Your business", ask: "What do you know about us?" },
+  { label: "The plan", ask: "What should we focus on this quarter?" },
+  { label: "The numbers", ask: "How did last week go?" },
+  { label: "Content", ask: "Write two Facebook posts for Halloween, with images." },
+  { label: "Routine", ask: "Every Monday at 9, review last week and tell me what to change." },
+];
 ---
-<div class="chat-card" aria-hidden="true">
-  <div class="chat-top"><span class="dot"><span></span></span><b>Seemo</b><small>Acme Bakery</small></div>
-  <div class="msg you">Write two Facebook posts for Halloween, with images.</div>
-  <div class="msg seemo">Two drafts from your profile: the pumpkin loaf is back from 14 October, and the Saturday kids' workshop still has seats.</div>
-  <div class="drafts">
-    <div class="draft">
-      <div class="img one"><span>Pumpkin loaf<br/>is back</span></div>
-      <p>Our pumpkin loaf is back, with roasted seeds on top. Fresh every morning until 31 October.</p>
-      <div class="acts"><span class="ok">Approve</span><span>Friday 09:00</span></div>
+<div class="chat-card" data-scenes role="region" aria-roledescription="carousel" aria-label="What Seemo does">
+  <div class="chat-top">
+    <span class="dot"><span></span></span><b>Seemo</b>
+    <div class="dots" role="group" aria-label="Choose an example">
+      {scenes.map((s, i) => <button type="button" class={i === 0 ? "on" : undefined} aria-label={s.label} aria-pressed={i === 0 ? "true" : "false"} data-go={i}></button>)}
     </div>
-    <div class="draft">
-      <div class="img two"><span>Little bakers<br/>Saturday</span></div>
-      <p>Spooky cookies, sprinkles and a lot of flour. The kids' workshop has six seats left.</p>
-      <div class="acts"><span class="ok">Approve</span><span>Draft</span></div>
+  </div>
+
+  <div class="scenes">
+    <div class="scene on" aria-hidden="false">
+      <div class="msg you">{scenes[0].ask}</div>
+      <div class="msg seemo">A neighbourhood bakery with a strong seasonal menu and a family audience. Each fact comes from a page on your site:</div>
+      <div class="facts">
+        <div><span>Offer</span>Sourdough, seasonal bakes, kids' workshops<a>/menu</a></div>
+        <div><span>Audience</span>Local families, weekend shoppers<a>/about</a></div>
+        <div><span>Voice</span>Warm, a little playful, never salesy<a>/blog</a></div>
+        <div><span>Edge</span>Everything baked on site before 7:00<a>/</a></div>
+      </div>
+    </div>
+
+    <div class="scene" aria-hidden="true">
+      <div class="msg you">{scenes[1].ask}</div>
+      <div class="msg seemo">Two goals for Q4, from what sells and who buys. I'd skip paid ads until the newsletter is growing.</div>
+      <div class="obj"><div class="obj-top"><b>More online orders</b><span class="up">+6%</span></div><div class="bar"><span class="w64"></span></div><div class="obj-meta"><span>Orders a month</span><span><b>96</b> of 150</span></div></div>
+      <div class="obj"><div class="obj-top"><b>Grow the newsletter</b><span class="up">+12%</span></div><div class="bar"><span class="w41"></span></div><div class="obj-meta"><span>Subscribers</span><span><b>820</b> of 2,000</span></div></div>
+      <div class="acts"><span class="ok">Approve the plan</span><span>Change it</span></div>
+    </div>
+
+    <div class="scene" aria-hidden="true">
+      <div class="msg you">{scenes[2].ask}</div>
+      <div class="tiles">
+        <div><span>Visits</span><b>1,284</b><em class="up">+18%</em></div>
+        <div><span>Orders</span><b>24</b><em class="up">+6%</em></div>
+        <div><span>Sign-ups</span><b>41</b><em class="down">−4%</em></div>
+      </div>
+      <div class="msg seemo">Visits are up, almost all from the pumpkin loaf post. Sign-ups dipped because the blog has no newsletter box. I'd add one this week.</div>
+    </div>
+
+    <div class="scene" aria-hidden="true">
+      <div class="msg you">{scenes[3].ask}</div>
+      <div class="msg seemo">Two drafts from your profile: the pumpkin loaf is back from 14 October, and the Saturday kids' workshop still has seats.</div>
+      <div class="drafts">
+        <div class="draft">
+          <div class="img one"><span>Pumpkin loaf<br/>is back</span></div>
+          <p>Our pumpkin loaf is back, with roasted seeds on top. Fresh every morning until 31 October.</p>
+          <div class="acts"><span class="ok">Approve</span><span>Friday 09:00</span></div>
+        </div>
+        <div class="draft">
+          <div class="img two"><span>Little bakers<br/>Saturday</span></div>
+          <p>Spooky cookies, sprinkles and a lot of flour. The kids' workshop has six seats left.</p>
+          <div class="acts"><span class="ok">Approve</span><span>Draft</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene" aria-hidden="true">
+      <div class="msg you">{scenes[4].ask}</div>
+      <div class="msg seemo">Every Monday I'll compare the week with the plan, name what worked and what didn't, and suggest the week's posts.</div>
+      <div class="task">
+        <div class="task-top"><span class="kind">Every week</span><span>Mondays 09:00</span></div>
+        <b>Weekly marketing review</b>
+        <p>Next: Monday 3 November · reads Google Analytics and the newsletter</p>
+      </div>
+      <div class="acts"><span class="ok">Start it</span><span>Change the time</span></div>
     </div>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-scenes]").forEach((card) => {
+    const scenes = [...card.querySelectorAll<HTMLElement>(".scene")];
+    const dots = [...card.querySelectorAll<HTMLButtonElement>("[data-go]")];
+    let at = 0;
+    let timer: number | undefined;
+    const show = (i: number) => {
+      at = (i + scenes.length) % scenes.length;
+      scenes.forEach((s, j) => { s.classList.toggle("on", j === at); s.setAttribute("aria-hidden", String(j !== at)); });
+      dots.forEach((d, j) => { d.classList.toggle("on", j === at); d.setAttribute("aria-pressed", String(j === at)); });
+    };
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const play = () => { if (!calm) { clearInterval(timer); timer = window.setInterval(() => show(at + 1), 6500); } };
+    const hold = () => clearInterval(timer);
+    dots.forEach((d) => d.addEventListener("click", () => { show(Number(d.dataset.go)); play(); }));
+    card.addEventListener("mouseenter", hold);
+    card.addEventListener("mouseleave", play);
+    card.addEventListener("focusin", hold);
+    card.addEventListener("focusout", play);
+    document.addEventListener("visibilitychange", () => (document.hidden ? hold() : play()));
+    play();
+  });
+</script>

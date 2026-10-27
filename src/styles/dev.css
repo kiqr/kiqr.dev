@@ -20,6 +20,47 @@
 .draft .acts { display: flex; justify-content: space-between; align-items: center; font: 11.5px var(--mono); color: var(--dim); }
 .draft .ok { color: var(--accent-ink); background: var(--accent); padding: 3px 9px; border-radius: 999px; font-weight: 600; }
 
+/* five conversations, one at a time, stacked in the same place */
+.chat-top .dots { margin-left: auto; display: flex; gap: 6px; }
+.chat-top .dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .16); cursor: pointer; transition: width .35s var(--ease), background .3s; }
+.chat-top .dots button { position: relative; }
+.chat-top .dots button::before { content: ""; position: absolute; inset: -10px -3px; }
+.chat-top .dots button:hover { background: rgba(255, 255, 255, .32); }
+.chat-top .dots button.on { width: 22px; background: var(--grad); }
+.chat-top .dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.scenes { display: grid; }
+.scene { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 12px; opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility 0s .45s; }
+.scene.on { opacity: 1; visibility: visible; transition: opacity .45s var(--ease); }
+.scene.on > * { animation: rise .5s var(--ease) both; }
+.scene.on > :nth-child(2) { animation-delay: .35s; }
+.scene.on > :nth-child(3) { animation-delay: .7s; }
+.scene.on > :nth-child(4) { animation-delay: .9s; }
+.scene .acts { display: flex; gap: 12px; align-items: center; font: 11.5px var(--mono); color: var(--dim); }
+.scene .ok { color: var(--accent-ink); background: var(--accent); padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+.facts { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--r); background: rgba(5, 7, 13, .45); }
+.facts > div { display: grid; grid-template-columns: 74px 1fr auto; gap: 10px; align-items: baseline; padding: 9px 12px; font-size: 13px; border-top: 1px solid var(--line); }
+.facts > div:first-child { border-top: 0; }
+.facts span { font: 11px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+.facts a { font: 11.5px var(--mono); color: var(--accent); }
+.obj { display: flex; flex-direction: column; gap: 7px; padding: 11px 13px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(5, 7, 13, .45); }
+.obj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14px; }
+.obj-top .up { font: 600 12px var(--mono); color: var(--accent); }
+.bar { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+.bar span { display: block; height: 100%; border-radius: inherit; background: var(--grad); }
+.bar .w64 { width: 64%; } .bar .w41 { width: 41%; }
+.obj-meta { display: flex; justify-content: space-between; gap: 10px; font: 12px var(--mono); color: var(--dim); }
+.obj-meta b { color: var(--fg); font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tiles > div { display: flex; flex-direction: column; gap: 2px; padding: 12px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(5, 7, 13, .45); }
+.tiles span { font: 11px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+.tiles b { font-size: 22px; font-weight: 650; letter-spacing: -.02em; }
+.tiles em { font: normal 600 12px var(--mono); }
+.tiles .up { color: var(--accent); } .tiles .down { color: var(--bad); }
+.task { display: flex; flex-direction: column; gap: 6px; padding: 13px 14px; border: 1px solid rgba(94, 234, 212, .3); border-radius: var(--r); background: radial-gradient(400px 120px at 0% 0%, rgba(94, 234, 212, .08), transparent 70%), rgba(5, 7, 13, .5); font-size: 14px; }
+.task-top { display: flex; justify-content: space-between; gap: 8px; font: 11.5px var(--mono); color: var(--dim); }
+.task .kind { color: var(--accent); text-transform: uppercase; letter-spacing: .1em; }
+.task p { margin: 0; color: var(--muted); font-size: 12.5px; }
+
 /* ---------------------------------------------------------------- features */
 .feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
 .feat { background: var(--glass); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; transition: transform .35s var(--ease), border-color .3s; }
@@ -124,6 +165,8 @@
   .drafts .draft:last-child { display: none; }
   .draft .img { aspect-ratio: 2.6; }
   .msg { max-width: 100%; }
+  .facts > div { grid-template-columns: 1fr auto; }
+  .facts span { grid-column: 1 / -1; }
 }
 
 /* ---------------------------------------------------- abilities: your own */
