@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Screen from "../components/Screen.astro";
 import ChatCard from "../components/ChatCard.astro";
+import RunsOn from "../components/RunsOn.astro";
 import AppIcon from "../components/AppIcon.astro";
 import { GITHUB } from "../lib/site";
 
@@ -38,11 +39,13 @@ const apps: [string, string][] = [["googleanalytics", "Google Analytics"], ["goo
           <a href="/docs/install" class="btn primary lg">Get started, free</a>
           <a href="#tour" class="btn lg">See it work</a>
         </div>
-        <p class="small">On your own Claude or Codex subscription or API key. No account needed.</p>
+        <p class="small">Free and open source. No account needed.</p>
       </div>
       <div class="reveal d2"><ChatCard /></div>
     </div>
   </section>
+
+  <RunsOn />
 
   <section class="lp-section" id="tour">
     <div class="wrap">

@@ -1,0 +1,21 @@
+---
+// The models Seemo thinks with: the user's own Claude or OpenAI account.
+import AppIcon from "./AppIcon.astro";
+const brains = [
+  { icon: "claude", name: "Claude", how: "Your Claude plan or API key" },
+  { icon: "openai", name: "OpenAI", how: "Your ChatGPT plan through Codex, or API key" },
+];
+---
+<section class="runs-on" aria-label="Runs on">
+  <div class="wrap">
+    <p class="runs-label">Runs on the AI you already pay for</p>
+    <div class="runs-logos">
+      {brains.map((b) => (
+        <div class="brain">
+          <AppIcon name={b.icon} size={30} />
+          <span><b>{b.name}</b><small>{b.how}</small></span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

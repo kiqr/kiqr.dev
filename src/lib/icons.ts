@@ -6,7 +6,7 @@ const COLORS: Record<string, string> = {
   wordpress: "#3d9be0", unblockingapi: "#ef2f72", googleanalytics: "#e37400",
   googlesearchconsole: "#458cf5", gmail: "#ea4335", x: "#e6ecf7",
   facebook: "#0866ff", plausibleanalytics: "#7c74f5", linkedin: "#0a66c2", email: "#e6ecf7",
-  openai: "#e6ecf7",
+  openai: "#e6ecf7", claude: "#d97757",
 };
 
 // A marketplace ability's id => its mark. Abilities without one get a letter.
