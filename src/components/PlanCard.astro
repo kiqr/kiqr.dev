@@ -1,0 +1,22 @@
+---
+// Seemo's plan for the quarter: objectives with a KPI each, measured against
+// the target, and the note it leaves when the numbers move.
+const objectives = [
+  { title: "Grow organic traffic", kpi: "Organic sessions", now: 2140, target: 3000, unit: " / mo", up: "+18%" },
+  { title: "More trial signups", kpi: "Key events", now: 38, target: 60, unit: "", up: "+6%" },
+  { title: "Rank for “bakery software”", kpi: "Avg. position", now: 14, target: 5, unit: "", up: "↑3", inverse: true },
+];
+const pct = (o: (typeof objectives)[number]) =>
+  Math.round(Math.min(1, o.inverse ? o.target / o.now : o.now / o.target) * 100);
+---
+<div class="plan-card" aria-hidden="true">
+  <div class="chat-top"><span class="dot"><span></span></span><b>Marketing plan</b><small>Q4 · Acme Bakery</small></div>
+  {objectives.map((o) => (
+    <div class="obj">
+      <div class="obj-top"><b>{o.title}</b><span class="up">{o.up}</span></div>
+      <div class="bar"><span style={`width:${pct(o)}%`}></span></div>
+      <div class="obj-meta"><span>{o.kpi}</span><span><b>{o.now.toLocaleString("en-US")}</b> {o.inverse ? "· target" : "of"} {o.target.toLocaleString("en-US")}{o.unit}</span></div>
+    </div>
+  ))}
+  <div class="msg seemo note"><b>Seemo</b> Organic sessions are up 18% this week, almost all from the pricing guide. I'd put the next campaign there: two comparison articles and a LinkedIn series. Want the proposal?</div>
+</div>

@@ -1,38 +1,40 @@
 ---
 import Base from "../layouts/Base.astro";
+import PlanCard from "../components/PlanCard.astro";
 import ChatCard from "../components/ChatCard.astro";
 import Install from "../components/Install.astro";
 import Steps from "../components/Steps.astro";
 import AppIcon from "../components/AppIcon.astro";
 import { GITHUB } from "../lib/site";
 
-const features: [string, string, string][] = [
-  ["It knows your business, with receipts", "The profile is extracted from your site, fact by fact, each one linked to its source page and kept current when the site changes. Everything Seemo makes starts from it.", "M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"],
-  ["Drafts you approve", "Every post lands in the chat as it will look, image included. Approve it for a channel, publish now or pick a time, and the daemon sends it on schedule.", "M20 6 9 17l-5-5"],
-  ["Tasks on a schedule", "“Every weekday at 10:00, write one LinkedIn post.” Say yes once; every run is kept with its steps and cost.", "M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"],
-  ["Images from day one", "No image API needed: on-brand cards rendered locally from your site's own colours, fonts and logo. Add fal.ai or OpenAI for photos.", "M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4"],
-  ["Teach it in plain words", "How you write a product update, how to publish to your blog: write it once as an ability and Seemo follows it every time.", "M4 19h16M6 15l9-9 3 3-9 9H6z"],
-  ["Files, not a database", "~/.kiqr is YAML and Markdown in a local git repository. Every change is a commit. Grep it, diff it, back it up.", "M4 4h10l6 6v10H4zM14 4v6h6"],
-  ["Your model, your machine", "Runs on your own Claude or Codex subscription or API key. No account, and nothing leaves your machine that you did not send.", "M4 6h16v10H4zM8 20h8M12 16v4"],
-  ["One binary, open source", "A Rust daemon with the UI embedded, a CLI and an MCP server. AGPL; nothing in the core is gated.", "M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"],
+// What a CMO owns, and how Seemo covers it.
+const owns: [string, string, string][] = [
+  ["Knows the business, with receipts", "A business profile extracted from your site, fact by fact, each linked to the page it came from and kept current when the site changes.", "M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"],
+  ["Owns the marketing plan", "Two to four objectives for the period, each with one KPI and a target, and the campaigns under them. Proposed on a card; changed when the facts change.", "M4 20V10M10 20V4M16 20v-7M22 20H2"],
+  ["Measures against the targets", "Google Analytics, Search Console and Plausible, read every morning. Each KPI against its target, the last 7 days against the 7 before.", "M3 17l6-6 4 4 8-8M15 7h6v6"],
+  ["Attributes what works", "Every link KIQR publishes carries UTM tags for its channel and campaign, so the numbers line up with the work.", "M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"],
+  ["Runs the campaigns", "Articles, social posts, emails and their images, each tied to an objective. On-brand images rendered locally from your own colours and logo.", "M22 2 11 13M22 2l-7 20-4-9-9-4z"],
+  ["Keeps a rhythm", "Recurring work as tasks on a schedule: a daily check of the numbers, a weekly review, the posts for the week. Every run is kept with its steps and cost.", "M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"],
+  ["Asks before acting", "Plans, campaigns, publishing and settings go through cards you approve. Nothing goes out until you say yes, or switch a channel to go on its own.", "M20 6 9 17l-5-5"],
+  ["Yours, on your machine", "Runs on your own Claude or Codex subscription or API key. Everything is YAML and Markdown in a local git repo. Open source, AGPL.", "M4 6h16v10H4zM8 20h8M12 16v4"],
 ];
-const apps: [string, string][] = [["wordpress", "WordPress"], ["email", "Email"], ["googleanalytics", "Google Analytics"], ["googlesearchconsole", "Search Console"], ["plausibleanalytics", "Plausible"], ["unblockingapi", "UnblockingAPI"], ["openai", "OpenAI images"], ["linkedin", "LinkedIn · soon"]];
+const apps: [string, string][] = [["googleanalytics", "Google Analytics"], ["googlesearchconsole", "Search Console"], ["plausibleanalytics", "Plausible"], ["wordpress", "WordPress"], ["email", "Email"], ["unblockingapi", "UnblockingAPI"], ["openai", "OpenAI images"], ["linkedin", "LinkedIn · soon"]];
 ---
-<Base full title="KIQR: a marketing team that lives on your machine" description="KIQR is an open-source marketing agent that runs on your own computer. It reads your website, builds a business profile with sources, and writes, designs and schedules posts, articles and emails with you.">
+<Base full title="KIQR: Seemo, the CMO that lives on your machine" description="KIQR is an open-source AI CMO that runs on your own computer. Seemo reads your website, proposes a marketing plan with KPIs and targets, measures it with your analytics and runs the campaigns, with every step approved by you.">
   <section class="lp-hero">
     <div class="wrap">
       <div class="reveal">
         <span class="eyebrow">Open source · Runs locally</span>
-        <h1>A marketing team that <em class="grad-text">lives on your machine.</em></h1>
-        <p class="lead">Give KIQR your website. It reads it, builds a business profile where every fact links back to its page, and from then on Seemo, the marketer built in, writes, designs and schedules with you.</p>
+        <h1>Meet Seemo, <em class="grad-text">your CMO.</em></h1>
+        <p class="lead">Give KIQR your website. Seemo learns the business, proposes a marketing plan with KPIs and targets, reads your analytics every morning, and runs the campaigns that move the numbers. You approve every step.</p>
         <Install />
         <div class="row">
           <a href="/docs/install" class="btn primary lg">Get started</a>
-          <a href={`${GITHUB}/kiqr`} class="btn lg">View on GitHub</a>
+          <a href="/docs" class="btn lg">How it works</a>
         </div>
         <p class="small">On your own Claude or Codex subscription or API key. No account needed.</p>
       </div>
-      <div class="reveal d2"><ChatCard /></div>
+      <div class="reveal d2"><PlanCard /></div>
     </div>
   </section>
 
@@ -40,25 +42,37 @@ const apps: [string, string][] = [["wordpress", "WordPress"], ["email", "Email"]
     <div class="wrap">
       <div class="reveal">
         <span class="eyebrow">How it works</span>
-        <h2>From your site to a week of posts.</h2>
-        <p class="intro">Three steps, then Seemo keeps going on the schedule you set.</p>
+        <h2>From your website to a plan, and the plan to results.</h2>
+        <p class="intro">Seemo works like a senior marketer who joined this morning and read the whole site before the first meeting.</p>
       </div>
       <Steps steps={[
-        ["Install and add your site", "One command, then <code>kiqr project add https://your-site.com</code>. KIQR reads up to 200 pages.", "M4 17l6-6-6-6M12 19h8"],
-        ["Check the profile", "What you sell, to whom, in which voice. Each fact links to the page it came from.", "M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"],
-        ["Approve and publish", "Seemo drafts with images. Approve for a channel, publish now or pick a time.", "M22 2 11 13M22 2l-7 20-4-9-9-4z"],
+        ["It learns the business", "Install, then <code>kiqr project add https://your-site.com</code>. Seemo reads up to 200 pages into a profile: offer, audience, voice, each fact with its source.", "M4 17l6-6-6-6M12 19h8"],
+        ["It proposes the plan", "Objectives for the period, a KPI and a target for each, the channels in play and the first campaigns. You approve or change it.", "M4 20V10M10 20V4M16 20v-7M22 20H2"],
+        ["It runs it and reports", "Campaigns go out through your channels, the numbers come in from your analytics, and Seemo tells you plainly what worked and what to change.", "M3 17l6-6 4 4 8-8M15 7h6v6"],
       ]} />
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Strategy</span>
+        <h2>Ask it what a CMO would know.</h2>
+        <p class="intro">Why signups are flat. Which channel to drop. What to do this quarter. Seemo answers from your profile, your plan and your numbers, gives its opinion and says where it comes from, then proposes the work on a card.</p>
+        <p class="intro">It never invents facts about the business. If the website doesn't say it and you didn't say it, Seemo doesn't know it.</p>
+      </div>
+      <div class="reveal d1"><ChatCard /></div>
     </div>
   </section>
 
   <section class="lp-section">
     <div class="wrap">
       <div class="reveal">
-        <span class="eyebrow">Why KIQR</span>
-        <h2>Built the way developers like it.</h2>
+        <span class="eyebrow">What Seemo owns</span>
+        <h2>The whole job, not just the posts.</h2>
       </div>
       <div class="feats">
-        {features.map(([title, text, icon], i) => (
+        {owns.map(([title, text, icon], i) => (
           <div class={`feat glow reveal d${i % 4}`}>
             <span class="ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icon}/></svg></span>
             <h3>{title}</h3>
@@ -72,12 +86,12 @@ const apps: [string, string][] = [["wordpress", "WordPress"], ["email", "Email"]
   <section class="lp-section">
     <div class="wrap split">
       <div class="reveal">
-        <span class="eyebrow">Marketplace</span>
-        <h2>Abilities, from the marketplace or your own words.</h2>
-        <p class="intro">Publish to WordPress, send email, read your analytics, create photos. An ability is a folder of Markdown and YAML; anyone can write one.</p>
+        <span class="eyebrow">Abilities</span>
+        <h2>Connect the numbers and the channels.</h2>
+        <p class="intro">Analytics to measure, channels to publish through, image models for photos. Install them from the marketplace, or teach Seemo how your team works in plain words.</p>
         <div class="row">
           <a href="/marketplace" class="btn primary">Browse the marketplace</a>
-          <a href="/docs/abilities" class="btn">Ability format</a>
+          <a href="/docs/teach" class="btn">Abilities and channels</a>
         </div>
       </div>
       <div class="apps reveal d1">
@@ -93,7 +107,7 @@ const apps: [string, string][] = [["wordpress", "WordPress"], ["email", "Email"]
       <div class="panel glow reveal">
         <span class="eyebrow">kiqr.cloud</span>
         <h2>Connect apps with one click.</h2>
-        <p>kiqr.cloud is the optional gateway between your local agent and the internet's apps. Sign in once, then connect WordPress, Google Analytics and more without copying a key.</p>
+        <p>kiqr.cloud is the optional gateway between your local KIQR and the internet's apps. Sign in once, then connect WordPress, Google Analytics and more without copying a key.</p>
         <div class="row">
           <a href="/cloud" class="btn primary lg">How kiqr.cloud works</a>
         </div>
@@ -105,7 +119,7 @@ const apps: [string, string][] = [["wordpress", "WordPress"], ["email", "Email"]
     <div class="wrap">
       <div class="panel glow reveal">
         <span class="eyebrow">Install</span>
-        <h2>Your marketer, on your machine.</h2>
+        <h2>Hire Seemo today.</h2>
         <Install />
         <div class="row">
           <a href="/docs" class="btn lg">Read the docs</a>

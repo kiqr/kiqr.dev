@@ -19,6 +19,9 @@ kiqr history <slug>
 kiqr events [--project <slug>]
 kiqr chat <slug>                 talk to Seemo from the terminal
 kiqr todo <slug>                 what waits for you: approvals, drafts, publishes coming up
+kiqr plan <slug>                 the marketing plan: objectives, targets, campaigns
+kiqr performance <slug> [--refresh]
+                                 each KPI against its target, per source
 kiqr assets ls|show|approve|publish|schedule|unpublish|archive|rm
 kiqr abilities ls|show|teach|install|update|pause|resume|rm
 kiqr accounts add <slug> <ability>

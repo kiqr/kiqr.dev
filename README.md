@@ -1,6 +1,6 @@
 # kiqr.dev
 
-The home of KIQR, the open-source marketing agent that runs on your own
+The home of KIQR, Seemo the open-source AI CMO that runs on your own
 computer: the landing page, the docs, the marketplace and the page about
 [kiqr.cloud](https://kiqr.cloud) (the gateway that connects your agent with
 apps; kiqr.cloud itself is only sign-in and accounts).

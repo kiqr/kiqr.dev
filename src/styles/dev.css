@@ -18,14 +18,6 @@
 .msg { max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
 .msg.you { align-self: flex-end; background: rgba(139, 156, 255, .16); border: 1px solid rgba(139, 156, 255, .25); border-bottom-right-radius: 6px; }
 .msg.seemo { align-self: flex-start; background: rgba(255, 255, 255, .04); border: 1px solid var(--line); border-bottom-left-radius: 6px; color: var(--muted); }
-.drafts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.draft { border: 1px solid var(--line); border-radius: var(--r); padding: 10px; background: rgba(5, 7, 13, .45); display: flex; flex-direction: column; gap: 8px; }
-.draft .img { aspect-ratio: 1.6; border-radius: 10px; display: flex; align-items: flex-end; padding: 10px; font: 650 14px/1.15 var(--sans); color: #1b1206; }
-.draft .img.one { background: linear-gradient(135deg, #ffb347, #ff7a18 60%, #7a2e00); }
-.draft .img.two { background: linear-gradient(135deg, #d7ff43, #5eead4 70%); color: #03211c; }
-.draft p { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
-.draft .acts { display: flex; justify-content: space-between; align-items: center; font: 11.5px var(--mono); color: var(--dim); }
-.draft .ok { color: var(--accent-ink); background: var(--accent); padding: 3px 9px; border-radius: 999px; font-weight: 600; }
 
 /* ---------------------------------------------------------------- features */
 .feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
@@ -87,10 +79,7 @@
 }
 @media (max-width: 560px) {
   .feats { grid-template-columns: 1fr; }
-  .drafts { grid-template-columns: 1fr; }
-  .drafts .draft:last-child { display: none; }
-  .draft .img { aspect-ratio: 2.6; }
-  .msg { max-width: 100%; }
+        .msg { max-width: 100%; }
   .docs-pager { grid-template-columns: 1fr; }
   .docs-pager a.next { grid-column: 1; }
 }
@@ -105,3 +94,22 @@
   .nav .links-c { margin-left: auto; gap: 2px; }
   .nav .links-c a { padding: 7px 9px; font-size: 14px; }
 }
+
+/* ------------------------------------------------------------ the plan card */
+.plan-card { background: var(--glass); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 20px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 14px; }
+.obj { display: flex; flex-direction: column; gap: 7px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r); background: rgba(5, 7, 13, .45); }
+.obj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14.5px; }
+.obj-top .up { font: 600 12px var(--mono); color: var(--accent); }
+.bar { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+.bar span { display: block; height: 100%; border-radius: inherit; background: var(--grad); }
+.obj-meta { display: flex; justify-content: space-between; gap: 10px; font: 12px var(--mono); color: var(--dim); }
+.obj-meta b { color: var(--fg); font-weight: 600; }
+.msg.note { max-width: 100%; font-size: 13.5px; }
+.msg.note b { display: block; color: var(--fg); font-size: 12.5px; margin-bottom: 2px; }
+.proposal { border: 1px solid rgba(94, 234, 212, .3); border-radius: var(--r); padding: 14px; background: radial-gradient(400px 120px at 0% 0%, rgba(94, 234, 212, .08), transparent 70%), rgba(5, 7, 13, .5); display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.proposal .p-head { display: flex; justify-content: space-between; gap: 8px; font: 11.5px var(--mono); color: var(--dim); }
+.proposal .kind { color: var(--accent); text-transform: uppercase; letter-spacing: .1em; }
+.proposal ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+.proposal .acts { display: flex; gap: 12px; align-items: center; font: 11.5px var(--mono); color: var(--dim); }
+.proposal .ok { color: var(--accent-ink); background: var(--accent); padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+.split .intro + .intro { margin-top: -24px; }
