@@ -12,7 +12,7 @@ It runs locally, on your own Claude or Codex subscription or API key. There is n
 ## The parts
 
 - **Projects.** One per website. A project holds the profile, the plan, the numbers, the drafts, the channels and the tasks.
-- **Seemo.** The CMO you talk to. Direct and specific, with opinions it explains. It answers from the profile, the plan and the numbers, and never invents facts about the business. Anything with a side effect, like a plan, a campaign, publishing or a settings change, goes through a card you approve.
+- **Seemo.** The CMO you talk to. Direct and specific, with opinions it explains. It answers from the profile, the plan and the numbers, and never invents facts about the business. Before it changes the plan, starts a campaign, publishes or changes a setting, it asks you first.
 - **The plan.** Two to four objectives for the period, each with one KPI (organic traffic, signups, qualified leads, rank positions, published) and a target, plus the campaigns under them. Seemo proposes it; you approve it or edit it on the Plan page.
 - **Performance.** Google Analytics, Search Console and Plausible are read once a day into snapshots. The Performance page shows each KPI against its target and the last 7 days against the 7 before. Every link KIQR publishes carries UTM tags, so the numbers line up with campaigns.
 - **Abilities.** What Seemo can do. Some are built in (the profile, the plan, writing, reading the web, images, tasks). The rest are folders of Markdown and YAML that you install from the [marketplace](/abilities) or write yourself in plain words. See [Abilities and channels](/docs/teach).

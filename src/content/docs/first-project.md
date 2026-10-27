@@ -17,7 +17,7 @@ Ask for one:
 
 > What should our marketing focus on this quarter?
 
-Seemo starts from the profile's positioning and audience, gives two or three options with their trade-offs, recommends one, and proposes the **marketing plan** on a card: two to four objectives, each with one KPI and a target, the channels in play and the first campaigns. Approve it, or change it on the **Plan** page.
+Seemo starts from the profile's positioning and audience, gives two or three options with their trade-offs, recommends one, and proposes the **marketing plan** for you to approve: two to four objectives, each with one KPI and a target, the channels in play and the first campaigns. Approve it, or change it on the **Plan** page.
 
 ## Connect the numbers
 
@@ -31,12 +31,12 @@ Campaigns sit under an objective, and everything Seemo makes for one joins it. C
 
 > Write two Facebook posts for Halloween, with images.
 
-Drafts land in the chat as they will look, images included. No image API is needed: Seemo designs on-brand cards and renders them locally from your site's own colours, fonts and logo. Approve a draft for a channel, publish now or pick a time. Seemo asks before publishing until you switch a channel to publish on its own.
+Drafts land in the chat as they will look, images included. No image API is needed: Seemo designs on-brand images and renders them locally from your site's own colours, fonts and logo. Approve a draft for a channel, publish now or pick a time. Seemo asks before publishing until you switch a channel to publish on its own.
 
 ## Keep a rhythm
 
 > Every Monday at 9:00, review last week's numbers against the plan and tell me what to change.
 
-Seemo proposes the task on a card and you say yes once. Every run is kept with its steps and cost. The **To do** page collects what waits for you: approvals, drafts and publishes coming up.
+Seemo suggests the task and you say yes once. Every run is kept with its steps and cost. The **To do** page collects what waits for you: approvals, drafts and publishes coming up.
 
 Prefer the terminal? Everything here has a command too: see the [CLI](/docs/cli).
