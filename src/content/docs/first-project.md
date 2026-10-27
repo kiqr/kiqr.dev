@@ -25,7 +25,7 @@ Seemo starts from the profile's positioning and audience, gives two or three opt
 
 ## Connect the numbers
 
-Install **Google Analytics**, **Search Console** or **Plausible** from the [marketplace](/marketplace) and add the project's account. KIQR reads them every morning into `metrics/`. The **Performance** page shows each KPI against its target and the last 7 days against the 7 before, with the top queries and pages. `kiqr performance <slug>` shows the same.
+Install **Google Analytics**, **Search Console** or **Plausible** from the [marketplace](/abilities) and add the project's account. KIQR reads them every morning into `metrics/`. The **Performance** page shows each KPI against its target and the last 7 days against the 7 before, with the top queries and pages. `kiqr performance <slug>` shows the same.
 
 Every link KIQR publishes to your own site carries `utm_source`, `utm_medium=kiqr` and `utm_campaign`, so your analytics show which campaign brought whom.
 

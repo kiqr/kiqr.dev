@@ -18,7 +18,7 @@ npm run build      # dist/
 | Page | Source |
 |---|---|
 | `/` | `src/pages/index.astro` |
-| `/marketplace` | `src/pages/marketplace.astro`, read from the [marketplace index](https://github.com/kiqr/marketplace) at build time (`MARKETPLACE_URL` overrides it) |
+| `/abilities` | `src/pages/abilities.astro`, read from the [marketplace index](https://github.com/kiqr/marketplace) at build time (`MARKETPLACE_URL` overrides it) |
 | `/docs/*` | Markdown in `src/content/docs/`. `abilities.md` and `publish.md` are copies of `docs/abilities.md` in KIQR and the marketplace README; update them together. |
 | `/cloud` | `src/pages/cloud.astro` |
 | `/install.sh` | `public/install.sh`, a copy of `install.sh` in the KIQR repository |

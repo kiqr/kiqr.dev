@@ -18,7 +18,7 @@ Each agent registers itself and signs in with OAuth (the code flow with PKCE, or
 
 ## One-click apps
 
-Abilities marked **1-click** in the [marketplace](/marketplace) connect with a sign-in instead of a key:
+Abilities marked **1-click** in the [marketplace](/abilities) connect with a sign-in instead of a key:
 
 - **WordPress.** kiqr.cloud hands your site a secure return address. WordPress's own "Authorize Application" screen creates an application password, and the browser carries it straight on to your KIQR.
 - **Google Analytics and Search Console.** kiqr.cloud holds the Google app. Your agent asks Google for read-only access, the consent comes back through kiqr.cloud, and the token goes to your agent. Refreshing the token goes through kiqr.cloud too, so the app secret never leaves it.

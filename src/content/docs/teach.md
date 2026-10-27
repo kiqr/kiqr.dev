@@ -13,7 +13,7 @@ Writing, the business profile, reading the web, images with the built-in rendere
 
 ## From the marketplace
 
-Open **Setup → Abilities** to browse the [marketplace](/marketplace): publishing to WordPress, email over SMTP, Google Analytics, Search Console, Plausible, images with fal.ai or OpenAI, and more. Installing puts the ability on your computer with no keys. Each project then switches it on and adds its own **accounts** of it.
+Open **Setup → Abilities** to browse the [marketplace](/abilities): publishing to WordPress, email over SMTP, Google Analytics, Search Console, Plausible, images with fal.ai or OpenAI, and more. Installing puts the ability on your computer with no keys. Each project then switches it on and adds its own **accounts** of it.
 
 Some abilities connect with one click: you sign in to the app and approve, and the key never passes through your hands. Those go through [kiqr.cloud](/docs/cloud). The others take a key you paste once.
 

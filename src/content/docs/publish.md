@@ -5,7 +5,7 @@ order: 7
 section: Building abilities
 ---
 
-The [marketplace](/marketplace) lists abilities from [github.com/kiqr/marketplace](https://github.com/kiqr/marketplace). KIQR reads its `index.json` (`marketplace.url` in `~/.kiqr/config.yaml`) and shows every entry under Setup → Abilities. Installing an ability copies its folder into `~/.kiqr/abilities/<id>`; Update fetches it again.
+The [marketplace](/abilities) lists abilities from [github.com/kiqr/marketplace](https://github.com/kiqr/marketplace). KIQR reads its `index.json` (`marketplace.url` in `~/.kiqr/config.yaml`) and shows every entry under Setup → Abilities. Installing an ability copies its folder into `~/.kiqr/abilities/<id>`; Update fetches it again.
 
 An ability is a folder with an `extension.yaml` (a connection), a `SKILL.md` (instructions), or both. An index entry may also point at another public repository: set `repo` to it and leave `path` out. The formats are in [Ability format](/docs/abilities).
 

@@ -2,7 +2,7 @@
 import Mark from "./Mark.astro";
 import { CLOUD, GITHUB } from "../lib/site";
 const path = Astro.url.pathname.replace(/\.html$/, "");
-const links = [["/marketplace", "Marketplace"], ["/docs", "Docs"], ["/cloud", "Cloud"]];
+const links = [["/abilities", "Abilities"], ["/docs", "Docs"], ["/cloud", "Cloud"]];
 const on = (href: string) => path === href || path.startsWith(href + "/");
 ---
 <header class="top">

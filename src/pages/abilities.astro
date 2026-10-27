@@ -6,11 +6,11 @@ const apps = await load();
 apps.sort((a, b) => Number(b.oneClick) - Number(a.oneClick));
 const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
 ---
-<Base title="Marketplace" description="Abilities for KIQR: publish to WordPress, send email, read Google Analytics and Search Console, create images, read blocked pages. Install them in KIQR under Setup → Abilities.">
+<Base title="Abilities" description="Abilities for KIQR: publish to WordPress, send email, read Google Analytics and Search Console, create images, read blocked pages. Install them in KIQR under Setup → Abilities.">
   <section class="lp-hero apps-hero reveal">
     <div class="wrap">
       <div>
-        <span class="eyebrow">Marketplace</span>
+        <span class="eyebrow">Abilities</span>
         <h1>Abilities for your agent</h1>
         <p class="lead">Each one teaches Seemo something new or connects it to an app. Install them in KIQR under Setup → Abilities. Apps marked 1-click connect with a sign-in through <a href="/cloud">kiqr.cloud</a>, no keys to copy.</p>
       </div>
