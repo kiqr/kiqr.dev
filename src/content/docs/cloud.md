@@ -1,5 +1,5 @@
 ---
-title: "kiqr.cloud"
+title: "What is KIQR cloud?"
 description: "How kiqr.cloud links your KIQR agent and connects apps with one click, and what it keeps."
 order: 8
 section: kiqr.cloud
