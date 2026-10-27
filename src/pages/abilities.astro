@@ -6,13 +6,13 @@ const apps = await load();
 apps.sort((a, b) => Number(b.oneClick) - Number(a.oneClick));
 const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
 ---
-<Base title="Abilities" description="Abilities for KIQR: publish to WordPress, send email, read Google Analytics and Search Console, create images, read blocked pages. Install them in KIQR under Setup → Abilities.">
+<Base title="Abilities marketplace" description="Abilities for KIQR: publish to WordPress, send email, read Google Analytics and Search Console, create images, read blocked pages. Install them in KIQR under Setup → Abilities.">
   <section class="lp-hero apps-hero reveal">
     <div class="wrap">
       <div>
-        <span class="eyebrow">Abilities</span>
+        <span class="eyebrow">Marketplace</span>
         <h1>Abilities for your agent</h1>
-        <p class="lead">Each one teaches Seemo something new or connects it to an app. Install them in KIQR under Setup → Abilities. Apps marked 1-click connect with a sign-in through <a href="/cloud">kiqr.cloud</a>, no keys to copy.</p>
+        <p class="lead">Each one teaches Seemo something new or connects it to an app. Install them in KIQR under Setup → Abilities. Apps marked 1-click connect with a sign-in through <a href="/cloud">kiqr.cloud</a>, no keys to copy. Missing one? <a href="#own">Make your own</a>.</p>
       </div>
     </div>
   </section>
@@ -29,6 +29,17 @@ const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
       </div>
 
       <div class="app-cards">
+        <a href="#own" class="app-card own glow reveal" data-name="make your own ability teach seemo write publish" data-cats="">
+          <header>
+            <span class="mono-tile lg plus"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+            <span class="min0">
+              <h2>Make your own ability</h2>
+              <p class="by">by you</p>
+            </span>
+          </header>
+          <p class="sum">Teach Seemo how your team works in plain words, or connect any service with an API. Keep it for yourself, or share it here.</p>
+          <footer><span class="tag">your own</span></footer>
+        </a>
         {apps.map((app) => (
           <article class="app-card glow reveal" data-name={[app.name, app.summary, app.author].join(" ").toLowerCase()} data-cats={[...app.categories, app.oneClick ? "1-click" : ""].join(" ").trim()}>
             <header>
@@ -51,16 +62,17 @@ const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
     </div>
   </section>
 
-  <section class="lp-cta">
+  <section class="lp-cta" id="own">
     <div class="wrap">
       <div class="panel glow reveal">
-        <span class="eyebrow">Build</span>
-        <h2>Missing one? Write it.</h2>
-        <p>An ability is a folder of Markdown and YAML. Test it in your own KIQR, then open a pull request.</p>
+        <span class="eyebrow">Your own</span>
+        <h2>Missing one? Make it.</h2>
+        <p>An ability is a folder of Markdown and YAML. In KIQR, open Abilities and choose “Teach Seemo something”: describe how you write a product update or what the Monday report holds, and Seemo follows it every time. Connect a service with an API the same way. Built something others would want? Share it here.</p>
         <div class="row">
-          <a href="/docs/publish" class="btn primary lg">Publish an ability</a>
-          <a href="/docs/abilities" class="btn lg">Ability format</a>
+          <a href="/docs/teach" class="btn primary lg">Teach Seemo your own</a>
+          <a href="/docs/publish" class="btn lg">Publish to the marketplace</a>
         </div>
+        <p class="small-links"><a href="/docs/abilities">The ability format</a></p>
       </div>
     </div>
   </section>
