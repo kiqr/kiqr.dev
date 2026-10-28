@@ -29,10 +29,20 @@ shared with kiqr.cloud: `src/styles/site.css` is its stylesheet, and
 
 ## Deploy
 
-Cloudflare Pages, connected to this repository: build command `npm run build`,
-output directory `dist`, Node from `.nvmrc`. Every push to `main` deploys.
-`.github/workflows/rebuild.yml` triggers a build every six hours, so new
-marketplace abilities show up; it needs the Pages deploy hook URL as the
+Cloudflare (Workers & Pages), connected to this repository. Static files
+only: `wrangler.jsonc` serves `dist/` with `public/_headers` and
+`public/_redirects`, clean URLs (`/docs/install`) and `404.html`.
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production branch deploy command | `npx wrangler versions upload` |
+| Root directory | `/` |
+
+Node comes from `.nvmrc`. Every push to `main` deploys; other branches get a
+preview URL. `.github/workflows/rebuild.yml` triggers a build every six hours
+so new marketplace abilities show up; it needs a deploy hook URL as the
 `CF_PAGES_DEPLOY_HOOK` repository secret.
 
 ## License

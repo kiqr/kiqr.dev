@@ -1,0 +1,11 @@
+// Cloudflare: kiqr.dev is static files only, served from dist/ (no Worker
+// code). _headers and _redirects in public/ apply as they would on Pages.
+{
+  "name": "kiqr-dev",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
