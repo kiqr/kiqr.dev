@@ -1,6 +1,6 @@
 ---
 import Mark from "./Mark.astro";
-import { CLOUD, GITHUB } from "../lib/site";
+import { GITHUB } from "../lib/site";
 const path = Astro.url.pathname.replace(/\.html$/, "");
 const links = [["/abilities", "Abilities"], ["/docs", "Docs"], ["/cloud", "Cloud"]];
 const on = (href: string) => path === href || path.startsWith(href + "/");
@@ -13,7 +13,6 @@ const on = (href: string) => path === href || path.startsWith(href + "/");
       <a href={GITHUB} class="gh">GitHub</a>
     </div>
     <div class="end">
-      <a href={`${CLOUD}/users/sign_in`}>Sign in</a>
       <a href="/docs/install" class="btn primary">Install</a>
     </div>
   </nav>
