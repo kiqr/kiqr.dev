@@ -49,13 +49,13 @@ Underneath, the service is a systemd user service on Linux (`journalctl --user -
 
 The same command installs KIQR on a Linux server over SSH. With no desktop session, the installer also keeps KIQR running after you log out (`loginctl enable-linger`; when that needs root it tells you the `sudo` command).
 
-KIQR listens on the server itself only. From your computer, open it through an SSH tunnel:
+KIQR listens on the server itself only. To open it from your computer, forward its port over SSH. Run this on your computer, not on the server:
 
 ```sh
-ssh -L 4040:127.0.0.1:4040 you@your-server
+ssh -N -L 4040:127.0.0.1:4040 you@your-server
 ```
 
-then go to [http://127.0.0.1:4040](http://127.0.0.1:4040). To reach it from your network instead, change **Settings → Network** to "Every device on your network". KIQR has no password, so only do that on a network you trust. To keep the server current without logging in, run `kiqr update --auto on` once, or install with `KIQR_AUTO_UPDATE=1`.
+`-N` forwards the port without opening a shell, so the command just waits. Leave it running and go to [http://127.0.0.1:4040](http://127.0.0.1:4040) in your browser; press Ctrl+C to close the tunnel. To reach it from your network instead, change **Settings → Network** to "Every device on your network". KIQR has no password, so only do that on a network you trust. To keep the server current without logging in, run `kiqr update --auto on` once, or install with `KIQR_AUTO_UPDATE=1`.
 
 To use another port, or to open KIQR from other devices on your network, change the address under **Settings → Network**. KIQR restarts on the new address and the page follows it. `KIQR_PORT` and `KIQR_HOST` in the environment override what Settings says.
 
