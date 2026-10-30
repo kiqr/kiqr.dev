@@ -4,6 +4,6 @@ interface Props { src: string; alt: string; path: string; eager?: boolean }
 const { src, alt, path, eager = false } = Astro.props;
 ---
 <figure class="screen">
-  <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span>127.0.0.1:7777{path}</span></div>
+  <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span>127.0.0.1:4040{path}</span></div>
   <img src={src} alt={alt} width="2000" height="1250" loading={eager ? "eager" : "lazy"} decoding="async" fetchpriority={eager ? "high" : undefined} />
 </figure>

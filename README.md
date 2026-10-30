@@ -21,7 +21,7 @@ npm run build      # dist/
 | `/abilities` | `src/pages/abilities.astro`, read from the [marketplace index](https://github.com/kiqr/marketplace) at build time (`MARKETPLACE_URL` overrides it) |
 | `/docs/*` | Markdown in `src/content/docs/`. `abilities.md` and `publish.md` are copies of `docs/abilities.md` in KIQR and the marketplace README; update them together. |
 | `/cloud` | `src/pages/cloud.astro` |
-| `/install.sh` | `public/install.sh`, a copy of `install.sh` in the KIQR repository |
+| `/install.sh`, `/install.ps1` | Redirects (`public/_redirects`) to `install.sh` and `install.ps1` on the KIQR repository's `main` |
 
 The look (connect and cloud: teal and periwinkle on deep night, Geist) is
 shared with kiqr.cloud: `src/styles/site.css` is its stylesheet, and

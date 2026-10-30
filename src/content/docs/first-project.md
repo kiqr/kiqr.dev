@@ -7,7 +7,7 @@ section: Start
 
 ## Add your site
 
-Open [http://127.0.0.1:7777](http://127.0.0.1:7777) and paste your website's address. Seemo reads up to 200 pages and builds the business profile: what you sell, to whom, against whom, in what voice, each fact linked to the page it came from. KIQR keeps it current when the site changes. Pages that block crawlers or need JavaScript are retried through [UnblockingAPI](https://unblockingapi.com) if you connect it, and reported as unreadable otherwise.
+Open [http://127.0.0.1:4040](http://127.0.0.1:4040) and paste your website's address. Seemo reads up to 200 pages and builds the business profile: what you sell, to whom, against whom, in what voice, each fact linked to the page it came from. KIQR keeps it current when the site changes. Pages that block crawlers or need JavaScript are retried through [UnblockingAPI](https://unblockingapi.com) if you connect it, and reported as unreadable otherwise.
 
 When it is done, Seemo summarises the profile and lists the fields worth a look. Lock the ones you correct: locked fields are ground truth for everything after.
 

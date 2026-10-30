@@ -1,1 +1,5 @@
 /marketplace /abilities 301
+# The installers live in the KIQR repository; serving them from there means
+# the site never hands out a stale copy. curl -L and irm follow the redirect.
+/install.sh https://raw.githubusercontent.com/kiqr/kiqr/main/install.sh 302
+/install.ps1 https://raw.githubusercontent.com/kiqr/kiqr/main/install.ps1 302
