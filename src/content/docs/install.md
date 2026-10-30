@@ -29,6 +29,7 @@ Then open [http://127.0.0.1:4040](http://127.0.0.1:4040) and paste your website'
 | `KIQR_BIN_DIR` | Where the binary goes. Default: `~/.local/bin`, or `%LOCALAPPDATA%\kiqr\bin` on Windows. |
 | `KIQR_NO_SERVICE=1` | Don't register the daemon as a service; start it with `kiqr start` when you want it. |
 | `KIQR_HOME` | Where KIQR keeps its data. Default: `~/.kiqr`. |
+| `KIQR_AUTO_UPDATE=1` | Install new releases on their own from now on. |
 | `KIQR_FROM_SOURCE=1` | Build from source with Cargo instead (macOS and Linux). `KIQR_REF` picks the branch or tag. |
 
 ## Running in the background
@@ -42,7 +43,19 @@ kiqr start
 kiqr restart
 ```
 
-Underneath, the service is a systemd user service on Linux (`journalctl --user -u kiqr` has its log), a launchd agent on macOS and a Task Scheduler task on Windows. On a Linux without systemd, `kiqr start` runs it in the background until you log out, logging to `~/.kiqr/daemon.log`. On Linux it runs while you are logged in. To keep it running after you log out, as on a server, run `loginctl enable-linger $USER` once.
+Underneath, the service is a systemd user service on Linux (`journalctl --user -u kiqr` has its log), a launchd agent on macOS and a Task Scheduler task on Windows. On a Linux without systemd, `kiqr start` runs it in the background until you log out, logging to `~/.kiqr/daemon.log`.
+
+## On a server
+
+The same command installs KIQR on a Linux server over SSH. With no desktop session, the installer also keeps KIQR running after you log out (`loginctl enable-linger`; when that needs root it tells you the `sudo` command).
+
+KIQR listens on the server itself only. From your computer, open it through an SSH tunnel:
+
+```sh
+ssh -L 4040:127.0.0.1:4040 you@your-server
+```
+
+then go to [http://127.0.0.1:4040](http://127.0.0.1:4040). To reach it from your network instead, change **Settings → Network** to "Every device on your network". KIQR has no password, so only do that on a network you trust. To keep the server current without logging in, run `kiqr update --auto on` once, or install with `KIQR_AUTO_UPDATE=1`.
 
 To use another port, or to open KIQR from other devices on your network, change the address under **Settings → Network**. KIQR restarts on the new address and the page follows it. `KIQR_PORT` and `KIQR_HOST` in the environment override what Settings says.
 
@@ -54,7 +67,15 @@ KIQR checks for a new version a few times a day. When one is out it says so in S
 kiqr update
 ```
 
-The daemon downloads the new release, checks it and restarts as the new version. You can also run the installer again, which updates KIQR in place and says so when you already have the latest. KIQR never updates without asking. Set `KIQR_UPDATE_CHECK=0` to stop it checking. In Docker, update by pulling the new image.
+The daemon downloads the new release, checks it and restarts as the new version. You can also run the installer again, which updates KIQR in place and says so when you already have the latest.
+
+KIQR doesn't update without asking unless you tell it to. To have it install new releases on its own, which suits a server, run:
+
+```sh
+kiqr update --auto on
+```
+
+or switch on **Updates** in Settings. It then installs a new version within a few hours of its release, at a moment when Seemo isn't working. Set `KIQR_UPDATE_CHECK=0` to stop it checking. In Docker, update by pulling the new image.
 
 Releases follow [semver](https://semver.org). Before 1.0, a minor release (0.x.0) brings new features and may change how `~/.kiqr` is laid out, and a patch release only fixes things. Every release is listed on [GitHub](https://github.com/kiqr/kiqr/releases).
 
