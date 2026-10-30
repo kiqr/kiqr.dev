@@ -1,5 +1,5 @@
 ---
-import Mark from "./Mark.astro";
+import Logo from "./Logo.astro";
 import { GITHUB } from "../lib/site";
 const path = Astro.url.pathname.replace(/\.html$/, "");
 const links = [["/abilities", "Abilities"], ["/docs", "Docs"], ["/cloud", "Cloud"]];
@@ -7,7 +7,7 @@ const on = (href: string) => path === href || path.startsWith(href + "/");
 ---
 <header class="top">
   <nav class="nav" aria-label="Main">
-    <a href="/" class="brand" aria-label="KIQR home"><Mark /><span>kiqr<small>.dev</small></span></a>
+    <a href="/" class="brand" aria-label="KIQR home"><Logo /><small>.dev</small></a>
     <div class="links-c">
       {links.map(([href, label]) => <a href={href} class={on(href) ? "on" : undefined}>{label}</a>)}
       <a href={GITHUB} class="gh">GitHub</a>
