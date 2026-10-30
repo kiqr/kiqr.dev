@@ -30,3 +30,14 @@ Abilities marked **1-click** in the [marketplace](/abilities) connect with a sig
 Your account: the email address (encrypted) and a password hash, or the GitHub, Google or Facebook login you chose. It also keeps the agents you linked, as hashed tokens.
 
 What passes through on its way to your agent is not stored: application passwords, app tokens and the answers of the apps. A return address is open for ten minutes and works once. Deleting your account removes it and every link at once.
+
+## The usage ping
+
+Every KIQR, signed in or not, tells kiqr.cloud every 15 minutes that it runs, and once more right after an ability is installed. That is how we know how many people use KIQR and which abilities matter. The ping is anonymous and holds:
+
+- a random id your KIQR made for it, to tell one install from another
+- the KIQR version, the operating system and processor type, and whether it runs in Docker
+- whether it is signed in to kiqr.cloud (yes or no, not who)
+- the ids of the installed abilities that the marketplace lists; abilities you made or installed from elsewhere are only counted, never named
+
+It holds no name, email, computer name, website, project or key, and kiqr.cloud does not keep the address it came from. To see exactly what is sent, run `kiqr telemetry` or open **Settings → General → Usage stats**. To stop it, switch it off there, run `kiqr telemetry off`, or set `KIQR_TELEMETRY=0` (or `DO_NOT_TRACK=1`) where KIQR runs.
