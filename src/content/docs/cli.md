@@ -24,7 +24,12 @@ kiqr performance <slug> [--refresh]
                                  each KPI against its target, per source
 kiqr assets ls|show|approve|publish|schedule|unpublish|archive|rm
 kiqr abilities ls|show|teach|install|update|pause|resume|rm
-kiqr accounts add <slug> <ability>
+kiqr accounts ls|add|set|default|rm|activity <slug> …
+kiqr accounts allow <slug> <account> publish auto|ask|off     what Seemo may do there (read, learn, measure: on|off)
+kiqr accounts places <slug> <account> [add <label> key=value… | add --list <list> | rm <place>]
+kiqr lists ls|add|import|unsubscribe|rm <slug> …             the people you email
+kiqr publish <slug> <type>/<id> <account> [--place <place>]
+kiqr email <slug> <to|-> <subject> <text> [--list <list>] [--from <account>]
 kiqr secrets set <NAME> [--project <slug>]
 kiqr signin [kiqr-cloud|unblockingapi]    list sign-ins, or sign in (a code to enter, or a link to open)
 kiqr signout <kiqr-cloud|unblockingapi>

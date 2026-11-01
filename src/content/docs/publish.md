@@ -52,26 +52,30 @@ the folders in the marketplace repository are worked examples.
   needs and what it costs, in the user's words.
 - Add an `avatar.svg`, 64 by 64, on a dark background, and name it in the
   manifest (`avatar: avatar.svg`).
-- Publishing to a social network? Declare the network on the channel kind
+- Publishing to a social network? Declare the network on the kind
   (`name`, `icon`, `profile_hosts`, `text_limit`, `image`, `preview`,
   `writing`; see "Networks" in [Ability format](/docs/abilities)) and list `kind`, `name`,
-  `icon` and `profile_hosts` under `channels` in the index entry, so KIQR
+  `icon` and `profile_hosts` under `channels` (the list of kinds) in the index entry, so KIQR
   recognises the business's profile there and can suggest your ability.
 - Sending the asset's image, or a call that takes several requests
   (register an upload, send the bytes, create the post)? Use `steps` and the
   upload bodies (`multipart`, `form`, `body_file`); see "Steps" and
   "Uploading files" in [Ability format](/docs/abilities). `wordpress/` is a worked example.
 - Give each key a `placeholder` (what a value looks like, shown inside the
-  empty field) and keep `help` for where to get it. Destination fields take
+  empty field) and keep `help` for where to get it. Place fields take
   the same two.
 - A key with a fixed set of values (a security mode, a region) lists them in
   `options`; KIQR shows a list instead of a text field and refuses anything
-  else. A destination field does the same with `enum`.
+  else. A place field does the same with `enum`.
 - Describe one account. Installing puts your ability on the machine with no
   keys; each project then adds as many accounts of it as it wants (two
-  sites, two mail accounts), and for a publishing ability each channel is
-  one account. So `auth` and `connect` describe a single account, and the
-  summary says "add a channel per site", not "connect your site".
+  sites, two mail accounts), and for a publishing ability each account
+  publishes to its own places. So `auth` and `connect` describe a single account, and the
+  summary says "add an account per site", not "connect your site".
+- Name the service with a `service:` block (`name`, `icon`, `group`) so it
+  shows in the grid under Setup → Accounts, and set `allow:` for what a new
+  account may do by default, such as `allow: { publish: ask }`. See
+  [Ability format](/docs/abilities).
 - Add an entry to `index.json` with the same `id`, your `repo` and the
   folder as `path`. Copy a neighbouring entry and change every field; the
   entry is what the card shows before the ability is installed, so it must
@@ -84,7 +88,7 @@ will do:
 
 1. Setup → Abilities: the card shows your name, summary, avatar, cost and
    keys. Install it.
-2. Add an account (or a channel) with a real key on a test project, then a
+2. Add an account with a real key on a test project, then a
    second one. The switch turns on only when an account is ready; if it
    stays off, the manifest's `auth` or `hosts` are wrong.
 3. Ask Seemo to use it in a chat, and let a task use it once. For a

@@ -1,16 +1,17 @@
 ---
 title: "Ability format"
-description: "The reference for ability folders: SKILL.md instructions, extension.yaml connections, accounts, channels, signing in, steps and transports."
+description: "The reference for ability folders: SKILL.md instructions, extension.yaml connections, accounts, places, lists, signing in, steps and transports."
 order: 6
 section: Building abilities
 ---
 
-The two words a user sees, and the one folder format behind them.
+The three words a user sees, and the one folder format behind them.
 
 - **Ability**: something Seemo can do. KIQR's core ones are code (write, crawl a site into a business profile, read the web, read blocked pages with UnblockingAPI, write social media posts, run tasks on a schedule, create images with the built-in renderer); every other ability is one folder, holding **instructions** (`SKILL.md`: how Seemo does this kind of work, in words the user can edit), a **connection** (`extension.yaml`: a service behind a key, a program on this computer, or an MCP server, providing a contract such as `create_image` or a few tools of its own), or both ("Publish to WordPress": the call and the instructions for it). Abilities are installed once for the machine, from the marketplace under Setup → Abilities, and that only puts the code there; each project then switches it on, adds its own **accounts** of it (keys, see Accounts below) and teaches it (copies of the instructions). The user's own, written on that page in plain words, are abilities too. Core abilities can be switched off, never removed.
-- **Channel**: where a project's content goes out: an email address, a blog, an account. A channel is one account of an ability that publishes, plus a destination; a project can have as many as it wants of each kind (two blogs are two channels, each with its own keys). Publishing always asks the user first.
+- **Account**: everything Seemo signs in to: a mail account, a blog, a social account, an analytics property. A project can have as many as it wants of a service (two blogs are two accounts, each with its own keys). Each says what Seemo may do there. Publishing goes to an account, and to a place in it where the service has several.
+- **List**: the people a project emails, under Audience. Email goes from a mail account to an address or to a list.
 
-Seemo only ever sees tools, named after ability contracts, whatever installed ability is behind them, plus the list of abilities that come with instructions (`id — name: when it applies`) in its system prompt, which it reads with `read_instructions` before acting. Transport words (HTTP, MCP, command) stay in the manifest and under Advanced. The marketplace index (`config.marketplace.url`, `{ "abilities": [ { id, name, author, summary, version, repo, path, categories, icon, cost, provides, channels, auth, trust, transport } ] }`) lists repositories to clone, optionally a `path` inside one (the marketplace repository holds its own abilities as folders); a folder with an `extension.yaml` or a `SKILL.md` in a public git repository is all a community ability needs (`transport: instructions` in the index marks one that is instructions only). The vendor shown on the card is `author`, else the GitHub user or organisation in `repo`; KIQR's own are `kiqr` (github.com/kiqr). Installing copies the folder into `~/.kiqr/abilities/<id>` (committed, with `.source` remembering the repository and path); Update fetches the repository again.
+Seemo only ever sees tools, named after ability contracts, whatever installed ability is behind them, plus the list of abilities that come with instructions (`id — name: when it applies`) in its system prompt, which it reads with `read_instructions` before acting. Transport words (HTTP, MCP, command) stay in the manifest and under Advanced. The marketplace index (`config.marketplace.url`, `{ "abilities": [ { id, name, author, summary, version, repo, path, categories, icon, cost, provides, channels (kinds), auth, trust, transport } ] }`) lists repositories to clone, optionally a `path` inside one (the marketplace repository holds its own abilities as folders); a folder with an `extension.yaml` or a `SKILL.md` in a public git repository is all a community ability needs (`transport: instructions` in the index marks one that is instructions only). The vendor shown on the card is `author`, else the GitHub user or organisation in `repo`; KIQR's own are `kiqr` (github.com/kiqr). Installing copies the folder into `~/.kiqr/abilities/<id>` (committed, with `.source` remembering the repository and path); Update fetches the repository again.
 
 ## The folder
 
@@ -31,11 +32,12 @@ Switches: an ability is switched on and off per project, in its `project.yaml` (
 
 ## Accounts
 
-An installed ability holds no keys. A project adds **accounts** of it (the code calls them connections), each with a name and its own keys:
+An installed ability holds no keys. A project adds **accounts** of it (the code calls them connections), each with a name, its own keys, what Seemo may do through it and, where its service has several places to publish, its places:
 
 ```
 projects/<slug>/connections/<id>/connection.yaml   committed: id, label, ability, service, default, created_by, created_at
-                                                   and for a channel: kind, destination, asks_first, publications, last_published
+                                                   allow (role -> auto | ask | off), places, and when the service publishes:
+                                                   kind, publisher, publications, last_published
 projects/<slug>/connections/<id>/.env              the keys, never committed, mode 0600
 ```
 
@@ -50,14 +52,14 @@ projects/<slug>/connections/<id>/.env              the keys, never committed, mo
   daily_cap: 20            # actions per account per day, across every ability of the service; the lowest declared wins
   tools:
     - name: reply
-      role: reply          # publish | reply | manage | read; empty is read, or publish for a channel kind's publish tool
+      role: reply          # publish | reply | manage | read; empty is read, or publish for a publishing kind's publish tool
       target: "{{post_url}}"   # the thing acted on: the same role on the same target through one account is refused the second time
   ```
 
   Every action (a call whose role is not `read`) is logged on the account, `connections/<id>/activity.jsonl` (never committed): when, which ability, the role, the tool, the target and the link it returned. The cap counts today's (UTC) actions there. `GET /api/projects/{slug}/connections/{id}/activity` lists them, newest first, with today's count and the cap.
-- A channel is an account with a `kind`. A new one can start with the keys of another account of the same ability (`same_as`: the same mail account to another address); the keys are copied, so changing one later does not change the other.
-- `kiqr accounts ls|add|set|default|rm|activity` (`ls` shows each account's service, the abilities that use it and a channel's publisher); routes under `/api/projects/{slug}/connections`, channels under `/channels` as before. Accounts and channels in the UI say which abilities use them ("Used by", with what each does on a channel), a channel with several publishers has a select for the one that publishes, each has its activity, and an ability's Accounts tab names the other abilities it shares them with. Seemo reads the log with `channel_activity` before it replies or posts. Every logged action emits `AccountActed`; a refused one emits `ActionRefused` (`why`: `duplicate` or `cap`).
-- Homes from before accounts are moved once at start: each channel keeps its id with a copy of its ability's keys, an ability a project had keys for becomes its first account (a channel when its kind needs no destination), the ability's keys leave the project's `.env`, and an ability switched off for the machine becomes switched off in every project. Installing an ability later does the same for keys a project's `.env` still holds.
+- An account of a service that publishes has a `kind`. A new one can start with the keys of another account of the same ability (`same_as`: the same mail account to another address); the keys are copied, so changing one later does not change the other.
+- `kiqr accounts ls|add|set|default|rm|activity|allow|places` (`ls` shows each account's service, what Seemo may do through it, its places and the abilities that use it); routes under `/api/projects/{slug}/connections`. `kiqr channels` and `kiqr trust` still work as shortcuts. Accounts in the UI say which abilities use them ("Used by", with what each does), one with several publishers has a select for the one that publishes, each has its activity, and an ability's Accounts tab names the other abilities it shares them with. Seemo reads the log with `channel_activity` (the tool keeps its name) before it replies or posts. Every logged action emits `AccountActed`; a refused one emits `ActionRefused` (`why`: `duplicate` or `cap`).
+- Homes from before accounts are moved once at start: each channel keeps its id as an account with a copy of its ability's keys, an ability a project had keys for becomes its first account, the ability's keys leave the project's `.env`, and an ability switched off for the machine becomes switched off in every project. Installing an ability later does the same for keys a project's `.env` still holds. Records from before permissions and places are read into the new shape when loaded: "asks first" off becomes `publish: auto`, the Source switch becomes `learn`, a destination becomes the account's one place.
 
 ## SKILL.md
 
@@ -110,13 +112,13 @@ channels:
   - kind: wordpress
     label: WordPress blog
     publish: publish_article   # the tool (or ability) that performs a publish
-    destination:
+    place:                     # the fields a place inside an account has (a subreddit, a branch); empty: the account is the one place
       site: { type: string, label: Site, help: "https://myblog.com" }
 ```
 
 ### Networks
 
-A network is a channel kind; KIQR's code names none. An ability that publishes to a social network says what the rest of KIQR needs to know about it, on the channel kind:
+A network is a kind of account that publishes; KIQR's code names none. An ability that publishes to a social network says what the rest of KIQR needs to know about it, on the kind:
 
 ```yaml
 channels:
@@ -132,7 +134,7 @@ channels:
     writing: "600 to 1,300 characters, short paragraphs, at most three hashtags."
 ```
 
-With it installed, the posts job writes for that network (within its limit, following `writing`), its card is rendered at its size (`size: linkedin` in `create_image`), the preview shows its name and limit, and a post tagged `linkedin` matches a LinkedIn channel on approval. Seemo writes posts only for the networks a project can publish to; with none, the posts work anywhere.
+With it installed, the posts job writes for that network (within its limit, following `writing`), its card is rendered at its size (`size: linkedin` in `create_image`), the preview shows its name and limit, and a post tagged `linkedin` matches a LinkedIn account on approval. Seemo writes posts only for the networks a project can publish to; with none, the posts work anywhere.
 
 List the same fields (`kind`, `name`, `icon`, `profile_hosts`) under `channels` in the marketplace index: the brand crawl then finds the business's profile there before anything is installed, and Seemo suggests the ability ("I found your LinkedIn page; the marketplace has …") after the crawl and under To do, until the user installs it or says not now.
 
@@ -200,7 +202,7 @@ provides:
 
 The ability's arguments are KIQR's (`prompt`, `size`, `width`, `height`, `orientation`, `aspect`, `asset`, `name`, `title`); `size` presets become `width`/`height`. A `result` with `file_url` or `file_b64` makes the daemon fetch or decode the file and put it on the asset. A non-JSON response body is taken as the file itself.
 
-When a publish goes through a channel, the publish tool receives `title`, `text` (Markdown), `html`, `summary`, `tags`, `asset` and the channel's destination fields. Its `result.text` or a `url` in the answer becomes the publication's link.
+When a publish goes through an account, the publish tool receives `title`, `text` (Markdown), `html`, `summary`, `tags`, `asset` and the place's fields. Its `result.text` or a `url` in the answer becomes the publication's link.
 
 ### Uploading files
 
@@ -294,7 +296,7 @@ Numbers may be numbers or numeric strings; days `YYYYMMDD` or `YYYY-MM-DD`. Use 
     image: { tool: browser_take_screenshot, args: { filename: "{{name}}.png" } }
   ```
   `expose` offers the server's own tools raw under the ability's group. `provides` maps an ability onto one of them. Image or audio content in a result becomes a file.
-- **smtp**: mail through a server. The `smtp` block names it, each value a template (usually `${VAR}`); it serves `provides.email` and email channels with `to`, `subject` (else the title), `text` (Markdown, sent as plain text and HTML) and the asset's files attached.
+- **smtp**: mail through a server. The `smtp` block names it, each value a template (usually `${VAR}`); it serves `provides.email` and email sends with `to`, `subject` (else the title), `text` (Markdown, sent as plain text and HTML) and the asset's files attached.
   ```yaml
   transport: smtp
   smtp: { host: "${SMTP_HOST}", port: "${SMTP_PORT}", user: "${SMTP_USER}", password: "${SMTP_PASSWORD}", from: "${SMTP_FROM}", security: "${SMTP_SECURITY}" }   # security: starttls (default), tls, none
@@ -304,20 +306,20 @@ Numbers may be numbers or numeric strings; days `YYYYMMDD` or `YYYY-MM-DD`. Use 
 
 Every ability's modal shows what it includes: instructions, keys (and where each is set), hosts it may call, the program or MCP server it runs, its tools, where it publishes, what it provides. One that runs a program is marked so and is never installed without you.
 
-## Channels
+## Publishing: kinds, places and lists
 
-A channel is an account with a kind (see Accounts): `projects/<slug>/connections/<id>/`, with its own keys.
-
-Several abilities may work on one channel: every ability of the channel's service that declares its kind, each with what it does there (`does` on the kind: `publish`, `read`, `reply`, `manage`; `publish` when left out, which then needs a `publish` tool). One that only reads or replies leaves out `publish`:
+An account of a service that publishes has a kind (see Accounts). Several abilities may work on one account: every ability of its service that declares the kind, each with what it does there (`does` on the kind: `publish`, `read`, `reply`, `manage`; `publish` when left out, which then needs a `publish` tool). One that only reads or replies leaves out `publish`. The manifest key that holds the kinds is still `channels`:
 
 ```yaml
 service: demo
 channels:
-  - { kind: demo-page, label: Demo page, destination: { page: { label: Page } }, does: [read, reply] }
+  - { kind: demo-page, label: Demo page, place: { page: { label: Page } }, does: [read, reply] }
 ```
 
-Exactly one ability publishes to a channel: its `publisher` (`connection.yaml`, set with `PUT …/channels/{id} {publisher}` from those that can), else the ability it was made with, else the first that is on here. A call any ability of the service makes through a channel (its tool's `connection` argument names it) gets the channel's destination fields for what the call left out. The channel view lists `publisher`, `publishers` and `used_by` (each ability with what it does there); the kinds a new channel can use come once per service and kind, with the abilities behind it.
+Exactly one ability publishes through an account: its `publisher` (`connection.yaml`, set with `PUT .../connections/{id} {publisher}` from those that can), else the ability it was made with, else the first that is on here. A call any ability of the service makes through the account (its tool's `connection` argument names it, `place` names the place) gets the place's fields for what the call left out. The account view lists `publisher`, `publishers` and `used_by` (each ability with what it does there).
 
-Create one on the Channels page or in the ability's Channels tab, with `kiqr channels <slug>` to list, or let Seemo propose one (`create_channel`, confirmed on a card). Publish with the asset page's Publish button, `kiqr publish <slug> <type>/<id> <channel>`, or Seemo's `publish_asset`, which always opens a card first. A task run that reaches a publish gets the card in the task's chat and waits.
+A place is proposed by Seemo (`create_channel`, confirmed on a card) or added on the account. Publish with the asset page's Publish button (pick the account and the place), `kiqr publish <slug> <type>/<id> <account> [--place <place>]`, or Seemo's `publish_asset`, which opens a card unless the account lets Seemo publish on its own. A task run that reaches a publish gets the card in the task's chat and waits.
 
-Email is a channel kind like any other, declared by whichever ability sends mail: the marketplace's "Send email from your mail account" (`transport: smtp`, keys `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD` (a Gmail app password), optional `SMTP_PORT`, `SMTP_FROM`, `SMTP_SECURITY`), or an HTTP sender with `provides.email`.
+**Email.** A mail account is the sender, declared by whichever ability sends mail: the marketplace's "Send email from your mail account" (`transport: smtp`, keys `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD` (a Gmail app password), optional `SMTP_PORT`, `SMTP_FROM`, `SMTP_SECURITY`), or an HTTP sender with `provides.email`. Its places are **lists**: `send_email` goes to `to` (addresses) or to a `list`, from the account named by `from`. A send to a list is one message per person, in the background. A send log remembers who got it, so a stopped run picks up where it left, and every message ends with why it came and how to leave. From the terminal: `kiqr email ... --list`.
+
+**Lists** are the people a project emails, under Audience. Each has a name (committed) and its contacts (email, name, consent, added, unsubscribed), which are never committed, so personal data stays on the machine and out of history. Manage them with `kiqr lists ls|add|import|unsubscribe|rm`. Seemo sees counts, never addresses (`list_lists`), and proposes a new, empty list with `create_list` (a card); you add the people.

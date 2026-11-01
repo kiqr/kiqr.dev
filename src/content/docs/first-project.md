@@ -17,7 +17,7 @@ Ask for one:
 
 > What should our marketing focus on this quarter?
 
-Seemo starts from the profile's positioning and audience, gives two or three options with their trade-offs, recommends one, and proposes the **marketing plan** for you to approve: two to four objectives, each with one KPI and a target, the channels in play and the first campaigns. Approve it, or change it on the **Plan** page.
+Seemo starts from the profile's positioning and audience, gives two or three options with their trade-offs, recommends one, and proposes the **marketing plan** for you to approve: two to four objectives, each with one KPI and a target, where to publish and the first campaigns. Approve it, or change it on the **Plan** page.
 
 ## Connect the numbers
 
@@ -27,11 +27,11 @@ Every link KIQR publishes to your own site carries `utm_source`, `utm_medium=kiq
 
 ## Run a campaign
 
-Campaigns sit under an objective, and everything Seemo makes for one joins it. Connect a channel (a blog, an email account, a social account), then let Seemo propose the work, or ask:
+Campaigns sit under an objective, and everything Seemo makes for one joins it. Connect an account under Setup → Accounts (a blog, a mail account, a social account), then let Seemo propose the work, or ask:
 
 > Write two Facebook posts for Halloween, with images.
 
-Drafts land in the chat as they will look, images included. No image API is needed: Seemo designs on-brand images and renders them locally from your site's own colours, fonts and logo. Approve a draft for a channel, publish now or pick a time. Seemo asks before publishing until you switch a channel to publish on its own.
+Drafts land in the chat as they will look, images included. No image API is needed: Seemo designs on-brand images and renders them locally from your site's own colours, fonts and logo. Approve a draft for an account, and for a place in it where there are several. Publish now or pick a time. Emails go to an address or to a list. Seemo asks before publishing until you let that account post on its own.
 
 ## Keep a rhythm
 
