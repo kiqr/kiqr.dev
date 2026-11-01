@@ -74,8 +74,14 @@ the folders in the marketplace repository are worked examples.
   summary says "add an account per site", not "connect your site".
 - Name the service with a `service:` block (`name`, `icon`, `group`) so it
   shows in the grid under Setup → Accounts, and set `allow:` for what a new
-  account may do by default, such as `allow: { publish: ask }`. See
-  [Ability format](/docs/abilities).
+  account may do by default, such as `allow: { publish: ask }`. Several
+  abilities may name the same service and share its accounts: Google
+  Analytics and Search Console both say `service: google`, sign in once and
+  share `GOOGLE_TOKEN`. An ability that works on something inside the account
+  (a property, a site) declares it under `places:` and uses it as `{{property}}`
+  in its calls; a field with `choices` is picked from a list read through the
+  account. When an ability changes shape, `moved:` says what older accounts
+  called things so they move along. See [Ability format](/docs/abilities).
 - Add an entry to `index.json` with the same `id`, your `repo` and the
   folder as `path`. Copy a neighbouring entry and change every field; the
   entry is what the card shows before the ability is installed, so it must
