@@ -37,7 +37,7 @@ const apps: [string, string, "on" | "soon"][] = [
       <Steps steps={[
         ["Create your account", "With your email, or continue with GitHub, Google or Facebook.", "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0"],
         ["Link your KIQR agent", "In KIQR, choose “Sign in to kiqr.cloud” next to Settings. Approve the agent; on a server, enter the code it shows.", "M9 15l6-6M8 11l-2 2a3 3 0 0 0 4 4l2-2m4-2 2-2a3 3 0 0 0-4-4l-2 2"],
-        ["Connect your apps", "Pick an app in KIQR, sign in to it and approve. Your agent can work there right away.", "M5 12h4l3-7 3 14 3-7h1"],
+        ["Connect your apps", "Choose Sign in with Google or GitHub in the Vault, or an ability's own button like Connect with WordPress. Approve, and the sign-in is a credential your abilities can use.", "M5 12h4l3-7 3 14 3-7h1"],
       ]} />
     </div>
   </section>
@@ -47,7 +47,7 @@ const apps: [string, string, "on" | "soon"][] = [
       <div class="reveal">
         <span class="eyebrow">Apps</span>
         <h2>Where your agent can work</h2>
-        <p class="intro">More apps arrive through the KIQR marketplace. Each one is connected per project, so two blogs are two connections. <a href="/abilities">See the marketplace</a>.</p>
+        <p class="intro">More apps arrive through the KIQR marketplace. Each sign-in is a credential in your KIQR Vault, and each project allows the abilities that may use it. <a href="/abilities">See the marketplace</a>.</p>
       </div>
       <div class="apps">
         {apps.map(([icon, name, state], i) => (
@@ -65,7 +65,7 @@ const apps: [string, string, "on" | "soon"][] = [
     <div class="wrap">
       <div class="panel glow reveal">
         <span class="eyebrow">Connect</span>
-        <h2>Give your agent its accounts.</h2>
+        <h2>Give your agent its sign-ins.</h2>
         <p>Create a kiqr.cloud account and link your KIQR agent in a minute.</p>
         <div class="row">
           <a href={`${CLOUD}/users/sign_up`} class="btn primary lg" target="_blank" rel="noopener">Get started, free</a>

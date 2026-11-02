@@ -24,12 +24,24 @@ kiqr performance <slug> [--refresh]
                                  each KPI against its target, per source
 kiqr assets ls|show|approve|publish|schedule|unpublish|archive|rm
 kiqr abilities ls|show|teach|install|update|pause|resume|rm
-kiqr accounts ls|add|set|default|rm|activity <slug> …
-kiqr accounts allow <slug> <account> publish auto|ask|off     what Seemo may do there (read, learn, measure: on|off)
-kiqr accounts places <slug> <account> [add <label> key=value… | add --list <list> | rm <place>]
-kiqr lists ls|add|import|unsubscribe|rm <slug> …             the people you email
-kiqr publish <slug> <type>/<id> <account> [--place <place>]
-kiqr email <slug> <to|-> <subject> <text> [--list <list>] [--from <account>]
+kiqr vault ls|rm <id>                                       credentials on this machine
+kiqr vault add <template> <domains...> [--label <text>]     values are prompted, never args
+kiqr vault set <id> <field>
+kiqr vault signin|signout <slug> <id>
+kiqr vault activity <id>
+kiqr vault recommend <slug> <id>                            abilities that can use it
+kiqr access ls <slug>
+kiqr access allow|revoke <slug> <ability> <credential>
+kiqr channels ls <slug>
+kiqr channels add <slug> <link|site|kind> [field=value] [--publisher <credential>] [--label <text>] [--third-party]
+kiqr channels set <slug> <channel> publish|reply off|ask|auto
+kiqr channels set <slug> <channel> read|learn on|off
+kiqr channels set <slug> <channel> publisher <credential>|none
+kiqr channels set <slug> <channel> label <text>
+kiqr channels accept|learn|rm <slug> <channel>
+kiqr lists ls|add|import|unsubscribe|rm <slug> …             the people you email (lists are channels)
+kiqr publish <slug> <type>/<id> <channel>
+kiqr email <slug> <to|-> <subject> <text> [--list <list>] [--from <sender>]
 kiqr secrets set <NAME> [--project <slug>]
 kiqr signin [kiqr-cloud|unblockingapi]    list sign-ins, or sign in (a code to enter, or a link to open)
 kiqr signout <kiqr-cloud|unblockingapi>

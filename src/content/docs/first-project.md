@@ -21,17 +21,17 @@ Seemo starts from the profile's positioning and audience, gives two or three opt
 
 ## Connect the numbers
 
-Install **Google Analytics**, **Search Console** or **Plausible** from the [marketplace](/abilities) and add the project's account. KIQR reads them every morning into `metrics/`. The **Performance** page shows each KPI against its target and the last 7 days against the 7 before, with the top queries and pages.
+Install **Google Analytics**, **Search Console** or **Plausible** from the [marketplace](/abilities) and, on its Access tab, sign in with Google or allow a credential from the Vault. Pick the property or site once in the ability's settings. KIQR reads them every morning into `metrics/`. The **Performance** page shows each KPI against its target and the last 7 days against the 7 before, with the top queries and pages.
 
 Every link KIQR publishes to your own site carries `utm_source`, `utm_medium=kiqr` and `utm_campaign`, so your analytics show which campaign brought whom.
 
 ## Run a campaign
 
-Campaigns sit under an objective, and everything Seemo makes for one joins it. Connect an account under Setup → Accounts (a blog, a mail account, a social account), then let Seemo propose the work, or ask:
+Campaigns sit under an objective, and everything Seemo makes for one joins it. Add your credentials under Setup → Vault and check your channels under Marketing → Channels (a blog, a mailing list, a social profile, each with a publisher), then let Seemo propose the work, or ask:
 
 > Write two Facebook posts for Halloween, with images.
 
-Drafts land in the chat as they will look, images included. No image API is needed: Seemo designs on-brand images and renders them locally from your site's own colours, fonts and logo. Approve a draft for an account, and for a place in it where there are several. Publish now or pick a time. Emails go to an address or to a list. Seemo asks before publishing until you let that account post on its own.
+Drafts land in the chat as they will look, images included. No image API is needed: Seemo designs on-brand images and renders them locally from your site's own colours, fonts and logo. Approve a draft for a channel. Publish now or pick a time. Emails go to an address or to a list. Seemo asks before publishing until you let that channel publish on its own.
 
 ## Keep a rhythm
 

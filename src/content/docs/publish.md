@@ -55,33 +55,30 @@ the folders in the marketplace repository are worked examples.
 - Publishing to a social network? Declare the network on the kind
   (`name`, `icon`, `profile_hosts`, `text_limit`, `image`, `preview`,
   `writing`; see "Networks" in [Ability format](/docs/abilities)) and list `kind`, `name`,
-  `icon` and `profile_hosts` under `channels` (the list of kinds) in the index entry, so KIQR
+  `icon` and `profile_hosts` under `kinds` in the index entry, so KIQR
   recognises the business's profile there and can suggest your ability.
 - Sending the asset's image, or a call that takes several requests
   (register an upload, send the bytes, create the post)? Use `steps` and the
   upload bodies (`multipart`, `form`, `body_file`); see "Steps" and
   "Uploading files" in [Ability format](/docs/abilities). `wordpress/` is a worked example.
-- Give each key a `placeholder` (what a value looks like, shown inside the
-  empty field) and keep `help` for where to get it. Place fields take
-  the same two.
-- A key with a fixed set of values (a security mode, a region) lists them in
-  `options`; KIQR shows a list instead of a text field and refuses anything
-  else. A place field does the same with `enum`.
-- Describe one account. Installing puts your ability on the machine with no
-  keys; each project then adds as many accounts of it as it wants (two
-  sites, two mail accounts), and for a publishing ability each account
-  publishes to its own places. So `auth` and `connect` describe a single account, and the
-  summary says "add an account per site", not "connect your site".
-- Name the service with a `service:` block (`name`, `icon`, `group`) so it
-  shows in the grid under Setup → Accounts, and set `allow:` for what a new
-  account may do by default, such as `allow: { publish: ask }`. Several
-  abilities may name the same service and share its accounts: Google
-  Analytics and Search Console both say `service: google`, sign in once and
-  share `GOOGLE_TOKEN`. An ability that works on something inside the account
-  (a property, a site) declares it under `places:` and uses it as `{{property}}`
-  in its calls; a field with `choices` is picked from a list read through the
-  account. When an ability changes shape, `moved:` says what older accounts
-  called things so they move along. See [Ability format](/docs/abilities).
+- Ask for credentials, never own them. Installing puts your ability on the
+  machine with no keys; the user keeps logins, API keys and app passwords in
+  the Vault and allows your ability the ones it may use, per project, on its
+  Access tab. Under `credentials:` say what you would like ("an API key for
+  fal.ai", "an app password for the site"): the template, the hosts it is
+  for, what it is `for`, and `env`, which field a call gets under which name.
+  A credential's values only ever go to its own domains. A signed-in app
+  through kiqr.cloud names its `provider` and `scopes`; a service no provider
+  covers can carry its own one-click `connect` ("Connect with WordPress").
+- What a project picks once (a site's address, an analytics property, a
+  repository) is a setting, under `settings:`, used as `{{property}}` in your
+  calls. Give each setting a `placeholder` (what a value looks like, shown
+  inside the empty field) and keep `help` for where to get it. A setting with
+  a fixed set of values (a security mode, a region) lists them in `enum`; one
+  with `choices` is picked from a list read through the credential. Publishing
+  abilities declare where content goes as `kinds`; Seemo publishes there only
+  through a channel, with what the user allows on it. See
+  [Ability format](/docs/abilities).
 - Add an entry to `index.json` with the same `id`, your `repo` and the
   folder as `path`. Copy a neighbouring entry and change every field; the
   entry is what the card shows before the ability is installed, so it must
@@ -94,11 +91,12 @@ will do:
 
 1. Setup → Abilities: the card shows your name, summary, avatar, cost and
    keys. Install it.
-2. Add an account with a real key on a test project, then a
-   second one. The switch turns on only when an account is ready; if it
-   stays off, the manifest's `auth` or `hosts` are wrong.
+2. On its Access tab, add a credential with a real key on a test project
+   and allow it, then a second one. The switch turns on only when a complete
+   credential is allowed; if it stays off, the manifest's `credentials` or
+   `hosts` are wrong.
 3. Ask Seemo to use it in a chat, and let a task use it once. For a
-   publishing ability, publish a real draft to a test account and check the
+   publishing ability, publish a real draft to a test channel and check the
    permalink lands on the asset. For instructions, ask for the kind of work
    they describe and read what Seemo made.
 4. `kiqr abilities ls` shows it on, `kiqr abilities update <id>` fetches
@@ -114,7 +112,7 @@ One ability per pull request, against `main`. The description says:
 
 - what the ability lets Seemo do, in one paragraph a non-technical user
   understands;
-- what it needs (keys, an account, a program on the computer) and what it
+- what it needs (the credentials it asks for, a program on the computer) and what it
   costs per use;
 - which hosts it calls and why;
 - how you tested it: the service, the project, what Seemo made with it.
@@ -152,7 +150,7 @@ The bar is low on ceremony and high on care.
   like they were generated and never run are closed without ceremony.
 
 Nothing here is installed by default. The user chooses, then each project
-connects the ability with its own account or key. What KIQR cannot do without
+allows the ability the credentials it may use. What KIQR cannot do without
 (writing, the business profile, web reading, the built-in renderer, tasks, the
 marketing plan) ships inside the KIQR binary and is not listed here; everything
 else, including abilities whose code lives in KIQR (`transport: builtin`, such

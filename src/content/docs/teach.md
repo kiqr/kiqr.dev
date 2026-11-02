@@ -1,11 +1,29 @@
 ---
-title: "Accounts, abilities and lists"
-description: "Install abilities from the marketplace, teach Seemo your own in plain words, and connect the accounts Seemo signs in to, and keep lists of the people you email."
+title: "The Vault, channels and abilities"
+description: "Keep credentials in the Vault, say what Seemo may do on each channel, install abilities from the marketplace or teach Seemo your own, and allow each ability the credentials it needs."
 order: 5
 section: Using KIQR
 ---
 
-There are three things to know. An **account** is something Seemo signs in to: a mail account, a blog, a social account, an analytics property. An **ability** is something Seemo knows how to do. A **list** is the people you email, kept under Audience.
+There are three things to know. The **Vault** holds your credentials: logins, API keys, app passwords and sign-ins. A **channel** is anywhere your people are, and says what Seemo may do there. An **ability** is something Seemo knows how to do, and uses the credentials you allow it.
+
+## The Vault
+
+Open **Setup → Vault** and choose Add. Signed-in apps come first: "Sign in with Google" or "Sign in with GitHub" goes through [kiqr.cloud](/docs/cloud), and the key never passes through your hands. The others are a login, an API key, an app password, a mail server (SMTP) or custom fields.
+
+Each credential is scoped to one or more domains, and the first one gives it its icon. Its values only ever go to those domains. The Vault is machine-wide and encrypted, and it knows nothing about abilities, channels or projects. A value is never shown again once saved.
+
+A credential lists the abilities that can use it, by host.
+
+## Channels
+
+Open **Marketing → Channels**. A channel is a place your business's people are: **owned**, like your X profile, your company page, your blog or a mailing list, or **third-party**, like a subreddit or a forum. When Seemo crawls your site, it adds the profiles of yours it finds as owned channels.
+
+Each channel says what Seemo may do there. Read is on or off. Publish and Reply & engage are **off**, **ask me first** or **on its own**. Learn, on owned channels, is on or off. Its **publisher** is who Seemo posts as: a credential from the Vault. Picking the publisher also allows that ability to use the credential.
+
+A channel shows the one thing it is missing, with the fix: install the ability for its site, pick a publisher, or sign the publisher back in.
+
+Anywhere that is not a channel, Seemo always asks first, and your yes adds it as a channel.
 
 ## Built in
 
@@ -13,38 +31,28 @@ Writing, the business profile, reading the web, images with the built-in rendere
 
 ## From the marketplace
 
-Open **Setup → Abilities** to browse the [marketplace](/abilities): publishing to WordPress, email over SMTP, Google Analytics, Search Console, Plausible, images with fal.ai or OpenAI, and more. Installing puts the ability on your computer with no keys. Each project then switches it on and adds its own **accounts** of it.
+Open **Setup → Abilities** to browse the [marketplace](/abilities): publishing to WordPress, email over SMTP, Google Analytics, Search Console, Plausible, images with fal.ai or OpenAI, and more. An ability says the hosts it works on and the credentials it would like, such as "a login for x.com" or "an API key for fal.ai", but never owns one.
 
-Some abilities connect with one click: you sign in to the app and approve, and the key never passes through your hands. Those go through [kiqr.cloud](/docs/cloud). The others take a key you paste once.
+"Recommended for your credentials" suggests abilities for what is already in the Vault: a Google sign-in suggests Google Analytics and Search Console, with "Install and allow".
+
+## Access
+
+Each ability has an **Access** tab. Allow it credentials from the Vault per project with a switch, add a new one there (the Vault's Add panel, filled in for you), or use a one-click sign-in: "Sign in with Google", or an ability's own, like "Connect with WordPress", which makes an app password credential for your site.
+
+What a project picks once for an ability, such as a GA4 property, a WordPress site's address or a GitHub repository, is a setting on the ability.
 
 ## Teach your own
 
 How you write a product update, how to publish to your blog, what the Monday report contains: write it once on the Abilities page under "Teach Seemo something", and Seemo follows it every time. It is saved as a `SKILL.md` you can edit.
 
-## Accounts
-
-Open **Setup → Accounts** and choose "Connect an account". You get a grid of services: Social, Website and blog, Email, Numbers, Passwords and Sites behind a login. Sign in, or fill in a few fields, and then choose what Seemo may do there.
-
-Each account has its own setting for each thing Seemo can do through it. Posting, replying and managing are **on its own**, **ask me first** or **off**. Asking first is the default. Reading, learning about the business and measuring are on or off. A project can have as many accounts of a service as it wants, and two blogs are two accounts with their own keys.
-
-Abilities that reach a service show as "via your X account".
-
 ## Sites behind a login
 
-Some sites have no API, or sit behind your login or a paywall. Under "Sites behind a login", connect one with its address: Seemo gets a real browser of its own for it, headless, signed in as you, with the login kept. X and Reddit come as abilities on that browser: Seemo reads your timeline or a subreddit, searches, and replies and posts as you, each asking first until you say otherwise. Save the login in KIQR (user name, password, and the one-time code secret if the site asks for a code) and Seemo signs in by itself; only the sign-in itself ever reads those values. When a site asks for a person (a captcha, a device check), the account shows **Needs a hand**: "Take the controls" shows the browser in your KIQR and sends your clicks and keys to it, from anywhere you can reach KIQR. The browser comes with KIQR. The first time you connect a site, KIQR names the two programs behind it and asks before installing them into its own folder, checked against their published checksums, and shows what the install does as it runs. On Linux it needs Xvfb, a virtual display from your system's own packages: the installer offers it, and if it is missing the app shows the one command for your machine or installs it for you. Linux and Windows for now.
-
-## Publishing and places
-
-Publishing goes to an account, and to a place in it where the service has several: a subreddit, a branch, a list. Seemo asks first, unless you let that account post on its own.
+Some sites have no API, or sit behind your login or a paywall. Add a login for the site in the Vault: Seemo gets a real browser of its own for it, headless, signed in as you, with the session kept on the login credential for the whole machine. X and Reddit come as abilities on that browser: Seemo reads your timeline or a subreddit, searches, and replies and posts as you, as each channel allows. Save the user name, password, and the one-time code secret if the site asks for a code, and Seemo signs in by itself. Only Seemo's sign-in runner ever types those values; no ability call receives them. When a site asks for a person (a captcha, a device check), the credential shows **Needs a hand**: "Take the controls" on it in the Vault shows the browser in your KIQR and sends your clicks and keys to it, from anywhere you can reach KIQR. The browser comes with KIQR. The first time you need it, KIQR names the two programs behind it and asks before installing them into its own folder, checked against their published checksums, and shows what the install does as it runs. On Linux it needs Xvfb, a virtual display from your system's own packages: the installer offers it, and if it is missing the app shows the one command for your machine or installs it for you. Linux and Windows for now.
 
 ## Email and lists
 
-Email goes from your mail account to an address or to a list. A list lives under **Audience** and holds the people you email. A send to a list is one message per person, and each message ends with a line saying why it came and how to leave.
+Email goes from a mail server credential to an address or to a list. A list is a channel of kind list, under **Marketing → Channels**, and holds the people you email. They are kept on your machine, never in git. A send to a list is one message per person, and each message ends with a line saying why it came and how to leave.
 
-From the terminal, `kiqr accounts` and `kiqr lists` cover the same ground. See the [command line](/docs/cli).
-
-## Accounts are per project
-
-Keys belong to a project's accounts, never to the ability. They are kept in `~/.kiqr/projects/<slug>/connections/<id>/.env` (mode 0600, never committed). With more than one account of a service, Seemo picks the default unless you name another.
+From the terminal, `kiqr vault`, `kiqr access`, `kiqr channels` and `kiqr lists` cover the same ground. See the [command line](/docs/cli).
 
 Building one for others? See [Ability format](/docs/abilities) and [Publish to the marketplace](/docs/publish).

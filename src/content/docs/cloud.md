@@ -19,10 +19,10 @@ Each agent registers itself and signs in with OAuth (the code flow with PKCE, or
 
 ## One-click apps
 
-Abilities marked **1-click** in the [marketplace](/abilities) connect with a sign-in instead of a key:
+Abilities marked **1-click** in the [marketplace](/abilities) connect with a sign-in instead of a key. Each sign-in lands in the **Vault** (Setup → Vault) as a credential, scoped to its service's domains, and the abilities you allow on their Access tab use it:
 
-- **WordPress.** kiqr.cloud hands your site a secure return address. WordPress's own "Authorize Application" screen creates an application password, and the browser carries it straight on to your KIQR.
-- **Google Analytics and Search Console.** kiqr.cloud holds the Google app. Your agent asks Google for read-only access, the consent comes back through kiqr.cloud, and the token goes to your agent. Refreshing the token goes through kiqr.cloud too, so the app secret never leaves it.
+- **WordPress.** "Connect with WordPress" on the ability's Access tab. kiqr.cloud hands your site a secure return address. WordPress's own "Authorize Application" screen creates an application password, and the browser carries it straight on to your KIQR.
+- **Google Analytics and Search Console.** "Sign in with Google", in the Vault or on the ability's Access tab. kiqr.cloud holds the Google app. Your agent asks Google for read-only access, the consent comes back through kiqr.cloud, and the token goes to your agent. Refreshing the token goes through kiqr.cloud too, so the app secret never leaves it.
 - **UnblockingAPI.** Built into KIQR. You sign in with your UnblockingAPI account directly, without kiqr.cloud, and no API key to copy.
 
 ## What it keeps
