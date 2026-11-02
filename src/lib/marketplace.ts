@@ -12,9 +12,13 @@ export interface App {
 const BUILT_IN: App[] = [{
   id: "unblockingapi", name: "Read blocked pages with UnblockingAPI", author: "KIQR",
   summary: "A real browser and residential proxies for the pages KIQR could not read: crawls and Seemo's web reading. Sign in with your UnblockingAPI account, no API key to copy.",
-  categories: ["web"], cost: "about $0.001 per page read", homepage: "https://unblockingapi.com",
+  categories: ["browser"], cost: "about $0.001 per page read", homepage: "https://unblockingapi.com",
   oneClick: true, builtIn: true, channels: [],
 }];
+
+// What a category is called where it is shown; the id, capitalised, when it is not here.
+export const CATEGORY_LABELS: Record<string, string> = { social: "Social media", seo: "SEO" };
+export const categoryLabel = (c: string) => CATEGORY_LABELS[c] ?? c.charAt(0).toUpperCase() + c.slice(1);
 
 // One click: the ability signs in with a button (its `connect`), not with a key.
 const oneClick = (i: any) => {
@@ -30,6 +34,6 @@ export async function apps(): Promise<App[]> {
     id: i.id, name: i.name, author: i.author || "KIQR", summary: String(i.summary ?? ""), version: i.version,
     categories: (i.categories ?? []).map(String), cost: i.cost, homepage: i.homepage, avatar: i.avatar,
     oneClick: oneClick(i), builtIn: false,
-    channels: (i.channels ?? []).map((c: any) => c?.name ?? c?.kind).filter(Boolean),
+    channels: (i.kinds ?? i.channels ?? []).map((c: any) => c?.name ?? c?.kind).filter(Boolean),
   }))];
 }

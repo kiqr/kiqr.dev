@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import AppIcon from "../components/AppIcon.astro";
-import { apps as load } from "../lib/marketplace";
+import { apps as load, categoryLabel } from "../lib/marketplace";
 const apps = await load();
 apps.sort((a, b) => Number(b.oneClick) - Number(a.oneClick));
 const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
@@ -24,7 +24,7 @@ const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
         <div class="app-cats" role="group" aria-label="Category">
           <button class="chip-btn on" data-cat="">All</button>
           <button class="chip-btn" data-cat="1-click">1-click</button>
-          {categories.map((c) => <button class="chip-btn" data-cat={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</button>)}
+          {categories.map((c) => <button class="chip-btn" data-cat={c}>{categoryLabel(c)}</button>)}
         </div>
       </div>
 
@@ -52,7 +52,7 @@ const categories = [...new Set(apps.flatMap((a) => a.categories))].sort();
             <p class="sum">{app.summary}</p>
             <footer>
               {app.oneClick && <span class="oneclick-tag"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>1-click</span>}
-              {app.categories.map((c) => <span class="tag">{c}</span>)}
+              {app.categories.map((c) => <span class="tag">{categoryLabel(c)}</span>)}
               {app.cost && <span class="cost">{app.cost}</span>}
             </footer>
           </article>
