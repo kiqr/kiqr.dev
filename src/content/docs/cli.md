@@ -40,6 +40,9 @@ kiqr channels set <slug> <channel> publisher <credential>|none
 kiqr channels set <slug> <channel> label <text>
 kiqr channels accept|learn|rm <slug> <channel>
 kiqr lists ls|add|import|unsubscribe|rm <slug> …             the people you email (lists are channels)
+kiqr memory ls <slug>                                       what Seemo remembers here
+kiqr memory add <slug> <text> [--kind rule|preference|fact|lesson] [--scope everywhere|own|others]
+kiqr memory keep|rm <slug> <id>
 kiqr publish <slug> <type>/<id> <channel>
 kiqr email <slug> <to|-> <subject> <text> [--list <list>] [--from <sender>]
 kiqr secrets set <NAME> [--project <slug>]
